@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings</title>
+    <link rel="stylesheet" href="css/listings.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div id="navbar-placeholder"></div>
+
+
+    <!-- Search Bar Below Navigation -->
+    <div class="search-bar">
+        <div class="filter-dropdown">
+            <button class="dropdown-btn">Campus or Neighborhood <span>&#x25BC;</span></button>
+            <div class="dropdown-content">
+                <input type="text" placeholder="Search by Property Name">
+                <a href="#">Medford/Somerville</a>
+                <a href="#">Boston</a>
+                <a href="#">Allston</a>
+                <a href="#">Arlington</a>
+            </div>
+        </div>
+
+        <div class="filter-dropdown">
+            <button class="dropdown-btn">Price <span>&#x25BC;</span></button>
+            <div class="dropdown-content">
+                <input type="text" placeholder="Min.">
+                <input type="text" placeholder="Max.">
+                <a href="#">$500</a>
+                <a href="#">$700</a>
+                <a href="#">$900</a>
+            </div>
+        </div>
+
+        <div class="filter-dropdown">
+            <button class="dropdown-btn">Beds & Baths <span>&#x25BC;</span></button>
+            <div class="dropdown-content">
+                <label><input type="radio" name="beds" value="any" checked> Any</label>
+                <label><input type="radio" name="beds" value="1"> 1 Bed</label>
+                <label><input type="radio" name="beds" value="2"> 2 Beds</label>
+                <label><input type="radio" name="baths" value="1"> 1 Bath</label>
+                <label><input type="radio" name="baths" value="2"> 2 Baths</label>
+            </div>
+        </div>
+
+        <div class="filter-dropdown">
+            <button class="dropdown-btn">Building Type <span>&#x25BC;</span></button>
+            <div class="dropdown-content">
+                <label><input type="checkbox" value="apartment"> Apartment</label>
+                <label><input type="checkbox" value="house"> House</label>
+                <label><input type="checkbox" value="condo"> Condo</label>
+            </div>
+        </div>
+
+        <button class="clear-btn">Clear</button>
+        <button class="search-btn">Search</button>
+    </div>
+
+    <!-- JavaScript for loading the navbar -->
+    <script src="js/loadNavbar.js" defer></script>
+
+</body>
+</html>
