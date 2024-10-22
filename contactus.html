@@ -72,7 +72,6 @@
         background-color: #555;
     }
 
-
     button {
         font-size: 20px;
         padding: 10px 20px;
@@ -92,6 +91,7 @@
         font-size: 22px;
         color: #333;
     }
+
 </style>
 
 <html>
@@ -132,12 +132,12 @@
                                 <label for="renterEmail">Email:</label>
                                 <input type="email" id="renterEmail" name="renterEmail"><br>
                                 <label for="state">Where would you like to rent?:</label>
-                                <input list="states" id="state" name="state" placeholder="Choose address of desired home" />
+                                <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
                                 <label for="renterMessage">Message:</label><br>
                                 <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
                                 <input type="submit" value="Submit">
                         </form>
-                                <datalist id="states">
+                                <datalist id="houses">
                                 <option value="Home1" />
                                 <option value="Home2" />
                                 <option value="Home3" />
@@ -148,8 +148,7 @@
                                 <option value="Home8" />
                                 <option value="Home9" />
                                 <option value="Home10" />
-                                <!-- Add more state options here -->
-                        </datalist>
+                                </datalist>
                         `;
                     } else if (userType === 'landlord') {
                         formHTML = `
