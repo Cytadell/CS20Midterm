@@ -138,16 +138,16 @@
                                 <input type="submit" value="Submit">
                         </form>
                                 <datalist id="houses">
-                                <option value="Home1" />
-                                <option value="Home2" />
-                                <option value="Home3" />
-                                <option value="Home4" />
-                                <option value="Home5" />
-                                <option value="Home6" />
-                                <option value="Home7" />
-                                <option value="Home8" />
-                                <option value="Home9" />
-                                <option value="Home10" />
+                                    <option value="Home1" />
+                                    <option value="Home2" />
+                                    <option value="Home3" />
+                                    <option value="Home4" />
+                                    <option value="Home5" />
+                                    <option value="Home6" />
+                                    <option value="Home7" />
+                                    <option value="Home8" />
+                                    <option value="Home9" />
+                                    <option value="Home10" />
                                 </datalist>
                         `;
                     } else if (userType === 'landlord') {
@@ -165,7 +165,7 @@
                         </form>
                         `;
                     }
-                    $('.formBody').hide().html(formHTML).fadeIn();
+                    $('.formBody').html(formHTML).fadeIn();
                 });
         }
         </script>
