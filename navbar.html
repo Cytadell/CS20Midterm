@@ -1,54 +1,83 @@
 <!DOCTYPE html>
-<style>
-        a:link, a:visited {
-                color: #000000;
-                padding: 25px 35px;
-                text-align: center;
-                text-decoration: none;
-                background-color: #e2863a;
-                display: inline-block;
-        }
-
-        a:hover{
-                background-color: #dd9b65; 
-        }
-
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midterm Project</title>
+    <style>
         header {
-                position: sticky;
-                top: 0;
-                display: flex;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff; 
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo img {
+            width: 70px;
+            margin-left: 20px;
+        }
+
+        .navbar a {
+            color: #333;
+            padding: 15px 20px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0 10px;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #f0f0f0;
+            color: #000; 
+        }
+
+        .navbar a.contact {
+            background-color: #d45f00; 
+            color: white;
+            font-weight: bold;
+        }
+
+        .navbar a.contact:hover {
+            background-color: #d45f00c3;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin: auto; 
+        }
+
+        html{
                 margin: 0;
                 padding: 0;
-                align-items: center;
-                justify-content: space-between;
-                background-color: #f8b879ec;
-                
         }
-</style>
 
-<html>
-        <head>
-                <title>Midterm Project</title>
-                <link rel="stylesheet" href="css/styles.css">
-        </head>
-        
-        <header>
-                <div class="logo">
-                        <a href="index.html" style="background-color: transparent; padding: 0;">
-                                <img src="img/wip.png" alt="logo" style="width: 70px; margin-left: 20px;">
-                        </a>
-                </div>
-                <h1>Company Name</h1>
-                <div class="navbar"; style="float: right; margin: 5px";>
-                        <a href="index.html">Home</a>
-                        <a href="ourteam.html">Our Team</a>
-                        <a href="listings.html">Our Houses</a>
-                        <a href="OurHouses.html">Map of Houses</a>
-                        <a href="" style="background-color: #d40000;"><strong>Contact Us</strong></a>
-                </div>
-        </header>
-        
-        <body>
+    </style>
+</head>
 
-        </body>
+<header>
+    <div class="logo">
+        <a href="index.html">
+            <img src="img/wip.png" alt="Company Logo">
+        </a>
+    </div>
+    <h1>Company Name</h1>
+    <nav class="navbar">
+        <a href="index.html">Home</a>
+        <a href="ourteam.html">Our Team</a>
+        <a href="listings.html">Our Houses</a>
+        <a href="OurHouses.html">Map of Houses</a>
+        <a href="contactus.html" class="contact"><strong>Contact Us</strong></a>
+    </nav>
+</header>
+
+<body>
+</body>
+
 </html>
