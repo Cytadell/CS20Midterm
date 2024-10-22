@@ -109,6 +109,21 @@
         <div id="property-list" class="property-grid"></div>
 
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const listingIndex = urlParams.get('listing');
+        
+                if (listingIndex) {
+                    const listings = document.querySelectorAll('.property-grid'); 
+                    const targetListing = listings[listingIndex - 1]; 
+                    if (targetListing) {
+                        targetListing.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
+        </script>
+
 
         <!-- JavaScript for loading the navbar -->
         <script src="js/loadNavbar.js" defer></script>
