@@ -1,18 +1,69 @@
 body {
     margin: 0px;
+    background-color: rgb(63, 171, 218);
 }
 
 .home-header {
     width: 100%;
     height: 115.54px;
-    background-color: rgb(63, 171, 218);
+    background-color: rgb(87, 41, 13);
 }
 
 .header-picture {
     width: 100%;
-    height: 500px;
+    height: 350px;
     background-image: url('../img/homepage-header.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.picture-textbox {
+    padding: 50px;
+    width: auto;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 175px;
+    transform: translate(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 36px;
+    background-color: white;
+    border: solid 10px;
+    border-color: rgb(63, 171, 218);
+    border-radius: 50px;
+}
+
+.desc-box-1 {
+    padding: 50px;
+    width: auto;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    font-size: 130%;
+    background-color: rgb(87, 41, 13);;
+}
+
+.desc-box-1img {
+    width: 30%;
+    height: 80%;
+    padding: 30px;
+    background-image: url('../img/desc-box-1.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.desc-box-1txt {
+    width: 50%;
+    height: 80%;
+    padding: 30px;
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
 }
