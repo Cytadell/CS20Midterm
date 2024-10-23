@@ -10,7 +10,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: auto;
     }
 
     h1 {
@@ -52,7 +52,7 @@
     input, textarea {
         font-size: 18px;
         padding: 10px;
-        width: calc(100% - 20px);
+        width: 95%;
         margin-bottom: 20px;
         border: 1px solid #ddd;
         border-radius: 5px;
@@ -63,7 +63,6 @@
         background-color: #333;
         color: white;
         border: none;
-        cursor: pointer;
         width: 100%;
         border-radius: 5px;
         font-size: 18px;
@@ -73,16 +72,10 @@
         background-color: #555;
     }
 
-    .button-container {
-        text-align: center;
-        margin-top: 20px;
-    }
-
     button {
         font-size: 20px;
         padding: 10px 20px;
         margin: 0 10px;
-        cursor: pointer;
         border: none;
         border-radius: 5px;
         background-color: #333;
@@ -98,6 +91,7 @@
         font-size: 22px;
         color: #333;
     }
+
 </style>
 
 <html>
@@ -138,24 +132,23 @@
                                 <label for="renterEmail">Email:</label>
                                 <input type="email" id="renterEmail" name="renterEmail"><br>
                                 <label for="state">Where would you like to rent?:</label>
-                                <input list="states" id="state" name="state" placeholder="Choose address of desired home" />
+                                <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
                                 <label for="renterMessage">Message:</label><br>
                                 <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
                                 <input type="submit" value="Submit">
                         </form>
-                                <datalist id="states">
-                                <option value="Home1" />
-                                <option value="Home2" />
-                                <option value="Home3" />
-                                <option value="Home4" />
-                                <option value="Home5" />
-                                <option value="Home6" />
-                                <option value="Home7" />
-                                <option value="Home8" />
-                                <option value="Home9" />
-                                <option value="Home10" />
-                                <!-- Add more state options here -->
-                        </datalist>
+                                <datalist id="houses">
+                                    <option value="Home1" />
+                                    <option value="Home2" />
+                                    <option value="Home3" />
+                                    <option value="Home4" />
+                                    <option value="Home5" />
+                                    <option value="Home6" />
+                                    <option value="Home7" />
+                                    <option value="Home8" />
+                                    <option value="Home9" />
+                                    <option value="Home10" />
+                                </datalist>
                         `;
                     } else if (userType === 'landlord') {
                         formHTML = `
@@ -172,7 +165,7 @@
                         </form>
                         `;
                     }
-                    $('.formBody').hide().html(formHTML).fadeIn();
+                    $('.formBody').html(formHTML).fadeIn();
                 });
         }
         </script>
