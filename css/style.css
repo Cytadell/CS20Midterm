@@ -66,3 +66,21 @@ body {
     background-color: white;
     border-radius: 50px;
 }
+
+.desc-box-2 {
+    margin: 50px;
+    padding: 50px;
+    text-align: center;
+    font-size: 130%;
+    line-height: 2;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.desc-box-2grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr; 
+    gap: 40px;
+    padding: 20px;
+}
