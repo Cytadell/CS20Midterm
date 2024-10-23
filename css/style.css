@@ -40,18 +40,18 @@ body {
 .desc-box-1 {
     padding: 50px;
     width: auto;
-    height: 600px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch; 
     gap: 5%;
     font-size: 130%;
+    line-height: 2;
     background-color: rgb(87, 41, 13);;
 }
 
 .desc-box-1img {
     width: 30%;
-    height: 80%;
+    height: auto;
     padding: 30px;
     background-image: url('../img/desc-box-1.jpg');
     background-size: cover;
@@ -61,7 +61,6 @@ body {
 
 .desc-box-1txt {
     width: 50%;
-    height: 80%;
     padding: 30px;
     text-align: center;
     background-color: white;
