@@ -272,5 +272,43 @@ body {
         .fav-icon:hover {
                 transform: scale(1.1);
         }
-            
+        
+.filter-mobile {
+        display: none;
+}
 
+@media (max-width: 768px) {
+        .filter-mobile {
+                display: block;
+        }
+
+        .filter-toggle {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                background-color: #f0f0f0;
+                border: 1px solid #ccc;
+                cursor: pointer;
+                font-size: 16px;
+        }
+
+        .search-bar {
+                display: none;
+        }
+
+        .filter-options {
+                display: none;
+                background-color: white;
+                position: absolute;
+                top: 50px;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                padding: 10px;
+        }
+
+        .filter-options.active {
+                display: block; 
+        }
+}    

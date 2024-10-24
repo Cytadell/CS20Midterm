@@ -12,6 +12,21 @@
         <!-- Navigation Bar -->
         <div id="navbar-placeholder"></div>
 
+
+        <!-- Mobile Filter Button -->
+        <div class="filter-mobile">
+                <button class="filter-toggle" onclick="toggleFilters()">Filter</button>
+                <div class="filter-options">
+                <!-- Include all original filter items here -->
+                <div class="filter-item" onclick="toggleCampusDropdown()">Campus</div>
+                <div class="filter-item" onclick="togglePriceDropdown()">Price</div>
+                <div class="filter-item" onclick="togglePricingTypeDropdown()">Pricing Type</div>
+                <div class="filter-item" onclick="toggleBedsBathsDropdown()">Beds & Baths</div>
+                <div class="filter-item" onclick="toggleBuildingTypeDropdown()">Building Type</div>
+                <div class="filter-item clear-btn" onclick="clearFilters()">Clear</div>
+                </div>
+        </div>
+
         <!-- Search Bar Below Navigation -->
         <div class="search-bar">
                 <!-- Campus Dropdown -->
