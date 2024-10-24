@@ -6,7 +6,7 @@
     <title>Midterm Project</title>
     <style>
         header {
-            height: 79.542px;
+            height: 80px;
             top: 0;
             display: flex;
             justify-content: space-between;
@@ -23,6 +23,8 @@
 
         .navbar {
             line-height: 3;
+            display: flex;
+            align-items: center;
         }
 
         .navbar a {
@@ -45,6 +47,11 @@
             background-color: #d45f00; 
             color: white;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            padding: 0 20px;
         }
 
         .navbar a.contact:hover {
@@ -59,8 +66,55 @@
         }
 
         html{
-                margin: 0;
-                padding: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown {
+            float: right;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            size: 0px;
+            font-size: 0px;
+            padding: 0px;
+            border: none;
+            outline: none;
+            color: black;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+        
+        .dropbtn img{
+            height: 0px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
         }
 
         @media(max-width: 1175px) {
@@ -74,9 +128,20 @@
         }
 
         @media(max-width: 860px) {
+            .dropdown .dropbtn {
+                size: 16px;
+                font-size: 16px;  
+                padding: 14px 16px;
+            }
 
+            .normLinks {
+                display: none;
+            }
+
+            .dropbtn img {
+                height: 30px;
+            }
         }
-
     </style>
 </head>
 
@@ -88,15 +153,33 @@
     </div>
     <h1>Company Name</h1>
     <nav class="navbar">
-        <a href="index.html">Home</a>
-        <a href="ourteam.html">Our Team</a>
-        <a href="listings.html">Our Houses</a>
-        <a href="OurHouses.html">Map of Houses</a>
+
+       
+        <div class="normLinks">
+                <a href="index.html">Home</a>
+                <a href="ourteam.html">Our Team</a>
+                <a href="listings.html">Our Houses</a>
+                <a href="OurHouses.html">Map of Houses</a>
+        </div>
+
+        <div class="dropdown">
+            <button class="dropbtn">
+                <img src="img/menu.png" alt="menu">
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="index.html">Home</a>
+                <a href="ourteam.html">Our Team</a>
+                <a href="listings.html">Our Houses</a>
+                <a href="OurHouses.html">Map of Houses</a>
+            </div> 
+        </div>
+
         <a href="contactus.html" class="contact"><strong>Contact Us</strong></a>
+
     </nav>
 </header>
 
 <body>
 </body>
-
 </html>
