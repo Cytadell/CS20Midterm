@@ -15,58 +15,43 @@ body {
 
         /* Search Bar Styles */
         .search-bar {
-                display: flex;
-                justify-content: flex-start;
-                align-items: stretch;
+                display: grid;
+                grid-template-columns: 20% 13% 14% 14% 14% 25%;
                 background-color: #f8f9fa;
-                border-bottom: 1px solid #ccc;
-                height: 50px;
+                border: 1px solid #ccc;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
         }
-        
+
         .filter-dropdown {
                 position: relative;
+                margin: 0;
+                width: 100%;
         }
-    
-    
+        
+
+        /* Action Section - Full Width */
+        .action-section {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px 15px;
+                font-size: 16px;
+                background-color: white;
+                border: 1px solid #ccc;
+        }
+        
         .dropdown-btn {
+                width: 100%;
                 height: 100%;
                 padding: 10px 15px;
+                font-size: 16px;
+                background-color: white;
+                border: 1px solid #ccc;
                 cursor: pointer;
-                border: 1px solid #ccc;
-                background-color: white;
-                font-size: 16px;
-                text-align: start;
+                box-sizing: border-box;
+        }
                 
-        }
-        
-        /* Custom Widths for Specific Buttons */
-        .campus-btn {
-                width: 240px;
-        }
-        
-        .price-btn {
-                width: 200px;
-        }
-        
-        .pricing-type-btn {
-                width: 180px;
-        }
-        
-        .beds-baths-btn {
-                width: 180px;
-        }
-        
-        .building-type-btn {
-                width: 180px;
-        }
-        
-        .sort-btn {
-                width: 150px;
-                padding: 10px 15px;
-                border: 1px solid #ccc;
-                background-color: white;
-                font-size: 16px;
-        }
 
         .dropdown-content {
                 display: none;
@@ -75,6 +60,7 @@ body {
                 box-shadow: 0 8px 16px rgba(0,0,0,0.2);
                 border: 1px solid #ccc;
                 z-index: 1000;
+                width: 100%;
         }
 
         .filter-dropdown:hover .dropdown-content {
@@ -83,23 +69,17 @@ body {
         
         .dropdown-item {
                 padding: 20px;
-                cursor: pointer;
+                text-align: center;
                 transition: background-color 0.3s;
                 border-right: 1px solid #ccc;
                 border-left: 1px solid #ccc;
                 border-bottom: 1px solid #ccc;
-                background-color: #ffffff;
-                color: rgb(0, 0, 0);
-                text-align: center;
+                cursor: pointer;
         }
 
         .dropdown-item:hover {
                 background-color: #6b6565;
                 color: rgb(255, 255, 255);
-        }
-
-        .dropdown--campus {
-                width: 197.5px;
         }
 
         .min-max-container {
@@ -125,6 +105,7 @@ body {
         .dash {
                 font-size: 16px;
                 color: #666;
+                padding-right: 5px;
         }    
 
         .dropdown-content label {
@@ -148,44 +129,26 @@ body {
                 padding-left: 7.5px;
         }    
         
-        /* Action section for Clear and Favorites buttons */
-        .action-section {
+        
+        .clear-btn, .favorites-btn{
                 display: flex;
                 align-items: center;
-                padding-left: 15px;
-                padding-right: 10px;
-                gap: 370px;
-                border: 1px solid #ccc;
-                background-color: white;
-        }
-        
-        .clear-btn {
-                padding: 0px 15px;
+                justify-content: center;
+                padding: 10px 15px;
                 height: 30px;
                 border: 1px solid #ccc;
                 background-color: white;
                 font-size: 16px;
                 color: #ccc;
-                cursor: not-allowed; /* Initially disabled */
+                cursor: not-allowed; 
         }
         
         .clear-btn.active {
-            color: #000; /* Active color */
+            color: #000; 
             cursor: pointer;
             border-color: #000;
         }
-        
-        .favorites-btn {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 0 10px;
-                color: #ccc;
-                height: 30px;
-                border: 1px solid #ccc;
-                background-color: #fff;
-                cursor: not-allowed; /
-        }
+
 
         .favorites-icon {
                 width: 20px;
@@ -200,7 +163,8 @@ body {
         .clear-btn:hover, .favorites-btn:hover {
                 background-color: #e6e6e6;
         }
-        
+
+
         /* Content Section Styles */
         .property-grid {
                 display: grid;
@@ -309,3 +273,4 @@ body {
                 transform: scale(1.1);
         }
             
+
