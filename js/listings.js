@@ -281,7 +281,7 @@ function renderProperties(properties) {
                 selectedBuildingType = [];
                 
                 // Reset UI inputs
-                document.querySelectorAll('.filter-dropdown input').forEach(input => {
+                document.querySelectorAll('.filter-dropdown input, .filter-bar input').forEach(input => {
                         if (input.type === 'checkbox') {
                                 input.checked = selectedPricingType.includes(input.value);
                         } else if (input.type === 'radio') {
@@ -445,48 +445,6 @@ function filterProperties() {
         // Update the Clear button state
         updateClearButtonState();
 }
-
-
-// Toggle filter options on mobile
-function toggleFilters() {
-        const filterOptions = document.querySelector('.filter-options');
-        filterOptions.classList.toggle('active');
-    }
-    
-    // Toggle dropdown visibility within mobile filter
-    function toggleCampusDropdown() {
-        const campusDropdown = document.querySelector('.campus-btn + .dropdown-content');
-        campusDropdown.classList.toggle('active');
-    }
-    
-    function togglePriceDropdown() {
-        const priceDropdown = document.querySelector('.price-btn + .dropdown-content');
-        priceDropdown.classList.toggle('active');
-    }
-    
-    function togglePricingTypeDropdown() {
-        const pricingTypeDropdown = document.querySelector('.pricing-type-btn + .dropdown-content');
-        pricingTypeDropdown.classList.toggle('active');
-    }
-    
-    function toggleBedsBathsDropdown() {
-        const bedsBathsDropdown = document.querySelector('.beds-baths-btn + .dropdown-content');
-        bedsBathsDropdown.classList.toggle('active');
-    }
-    
-    function toggleBuildingTypeDropdown() {
-        const buildingTypeDropdown = document.querySelector('.building-type-btn + .dropdown-content');
-        buildingTypeDropdown.classList.toggle('active');
-    }
-    
-    // Event listener to close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        const filterOptions = document.querySelector('.filter-options');
-        if (!filterOptions.contains(e.target) && filterOptions.classList.contains('active')) {
-            filterOptions.classList.remove('active');
-        }
-    });
-    
 
         renderProperties(properties);
         updateClearButtonState();

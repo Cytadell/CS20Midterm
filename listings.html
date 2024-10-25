@@ -14,16 +14,59 @@
 
 
         <!-- Mobile Filter Button -->
-        <div class="filter-mobile">
-                <button class="filter-toggle" onclick="toggleFilters()">Filter</button>
-                <div class="filter-options">
-                <!-- Include all original filter items here -->
-                <div class="filter-item" onclick="toggleCampusDropdown()">Campus</div>
-                <div class="filter-item" onclick="togglePriceDropdown()">Price</div>
-                <div class="filter-item" onclick="togglePricingTypeDropdown()">Pricing Type</div>
-                <div class="filter-item" onclick="toggleBedsBathsDropdown()">Beds & Baths</div>
-                <div class="filter-item" onclick="toggleBuildingTypeDropdown()">Building Type</div>
-                <div class="filter-item clear-btn" onclick="clearFilters()">Clear</div>
+        <div class="filter-bar">
+                <div class="filter-dropdown">
+                        <button class="dropdown-btn">Filter</button>
+                        <div class="dropdown-content">
+                                <h2>Campus</h2>
+                                <div class="submenu">
+                                        <label><input type="checkbox"> Medford/Somerville</label>
+                                        <label><input type="checkbox"> Boston</label>
+                                </div>
+                                <h2>Price</h2>
+                                <div class="submenu">
+                                        <div class="min-max-container">
+                                                <input type="text" placeholder="Min." class="min-input">
+                                                <span class="dash"> - </span>
+                                                <input type="text" placeholder="Max." class="max-input">
+                                        </div>
+                                </div>
+                                <h2>Pricing Type</h2>
+                                <div class="submenu">
+                                        <label><input type="checkbox"> Per Bedroom</label>
+                                        <label><input type="checkbox"> Per Unit</label>
+                                </div>
+                                <h2>Beds</h2>
+                                <div class="submenu">
+                                        <label><input type="radio" name="beds" value="Any"> Any</label>
+                                        <label><input type="radio" name="beds" value="Studio"> Studio</label>
+                                        <label><input type="radio" name="beds" value="1"> 1</label>
+                                        <label><input type="radio" name="beds" value="2"> 2</label>
+                                        <label><input type="radio" name="beds" value="3"> 3</label>
+                                        <label><input type="radio" name="beds" value="4+"> 4+</label>
+                                </div>
+
+                                <h2>Baths</h2>
+                                <div class="submenu">
+                                        <label><input type="radio" name="baths" value="Any"> Any</label>
+                                        <label><input type="radio" name="baths" value="1"> 1</label>
+                                        <label><input type="radio" name="baths" value="2"> 2</label>
+                                        <label><input type="radio" name="baths" value="3+"> 3+</label>
+                                </div>
+                                <h2>Building Type</h2>
+                                <div class="submenu">
+                                        <label><input type="checkbox"> Apartment</label>
+                                        <label><input type="checkbox"> House</label>
+                                        <label><input type="checkbox"> Condo</label>
+                                        <label><input type="checkbox"> Townhouse</label>
+                                        <label><input type="checkbox"> Duplex</label>
+                                        <label><input type="checkbox"> Triplex</label>
+                                </div>
+                                <div class="filter-actions">
+                                        <button class="clear-btn">Clear</button>
+                                        <button class="done-btn">Done</button>
+                                </div>
+                        </div>
                 </div>
         </div>
 
