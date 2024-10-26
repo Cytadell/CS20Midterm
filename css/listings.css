@@ -272,19 +272,26 @@ body {
         .fav-icon:hover {
                 transform: scale(1.1);
         }
+
+        .mobile-filters {
+                display: none;
+        }
         
-.filter-bar {
-        display: none;
-}
+
 
 @media (max-width: 1066px) {
-        .search-bar {
+
+        .mobile-filters {
+                display: flex;
+        }
+        
+        .desktop-filters {
                 display: none;
         }
 
+
         .filter-bar {
                 display: flex;
-                position: fixed;
                 flex-direction: column;
                 background-color: #f8f9fa;
                 border: 1px solid #ccc;
@@ -313,6 +320,7 @@ body {
                 
         .dropdown-content {
                 display: flex;
+                
                 flex-direction: column;
                 background-color: #fff;
                 border: 1px solid #ccc;
@@ -320,7 +328,6 @@ body {
                 width: 100%;
                 max-height: 80vh;
                 overflow-y: auto;
-                padding-bottom: 60px;
         }
 
 
@@ -371,17 +378,16 @@ body {
 
         /* Styling for Clear and Done buttons */
         .filter-actions {
-                position: sticky;
-                bottom: 0;
-                background-color: #fff;
                 display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                padding: 10px 20px;
+                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+                z-index: 1001;
                 justify-content: space-between;
-                padding-top: 10px;
-                padding-bottom: 25px;
-                padding-left: 15px;
-                padding-right: 15px;
-                border-top: 1px solid #ccc;
-                box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
             
         /* Button styles */
@@ -402,6 +408,13 @@ body {
                 background-color: white;
                 color: black;
         }
+        
+        .clear-btn.active {
+            color: #000; 
+            cursor: pointer;
+            border-color: #000;
+        }
+
         
         .done-btn {
                 background-color: black;

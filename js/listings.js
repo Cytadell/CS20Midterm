@@ -195,7 +195,7 @@ const properties = [
         },
     ];
     
-    // Function to render the property list
+// Function to render the property list
 function renderProperties(properties) {
         const propertyList = document.getElementById('property-list');
         propertyList.innerHTML = '';
@@ -226,16 +226,58 @@ function renderProperties(properties) {
         propertyList.innerHTML += propertyCard;
         });
 }
-        // Function to toggle the heart icon
-        function toggleFavorite(icon) {
-                if (icon.src.includes('base_heart.png')) {
-                        icon.src = 'img/full_heart.png';
-                } else {
-                        icon.src = 'img/base_heart.png';
-                }
+// Function to toggle the heart icon
+function toggleFavorite(icon) {
+        if (icon.src.includes('base_heart.png')) {
+                icon.src = 'img/full_heart.png';
+        } else {
+                icon.src = 'img/base_heart.png';
         }
+}
 
-                
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+/* OH queestion: How to not make it scroll over the dropdown content once the filter is toggled */
+document.addEventListener('DOMContentLoaded', function() {
+        const filterButton = document.getElementById('mobile-filter-btn');
+        const filterContent = document.getElementById('mobile-filter-content');
+        const doneButton = document.querySelector('.done-btn');
+        const mobileClearBtn = document.querySelector('.clear-btn.mobile-clear');
+        const desktopClearBtn = document.querySelector('.clear-btn.desktop-clear');
+    
+        // Initially hide the filter content
+        filterContent.style.display = 'none';
+    
+        // Toggle visibility of the filter content when the Filter button is clicked
+        filterButton.addEventListener('click', function() {
+                filterContent.style.display = filterContent.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // Attach event listeners to both Clear buttons
+        if (mobileClearBtn) {
+                mobileClearBtn.addEventListener('click', () => {
+                    clearFilters();
+                });
+            }
+        if (desktopClearBtn) {
+                desktopClearBtn.addEventListener('click', () => {
+                if (desktopClearBtn.classList.contains('active')) {
+                        clearFilters();
+                }
+                });
+        }
+        // Apply filters and close dropdown when Done button is clicked
+        doneButton.addEventListener('click', function() {
+                filterContent.style.display = 'none';
+                filterProperties();
+        });
+
+    
+});
         // Variables to store filter values
         let selectedCampus = null;
         let minPrice = null;
@@ -244,65 +286,63 @@ function renderProperties(properties) {
         let selectedBeds = null;
         let selectedBaths = null;
         let selectedBuildingType = [];
+        let selectedMobileCampus = [];
+        let selectedDesktopCampus = null;
+        let minMobilePrice = null;
+        let maxMobilePrice = null;
+        let minDesktopPrice = null;
+        let maxDesktopPrice = null;
 
-
-        // Event listener for the Clear button
-        const clearBtn = document.querySelector('.clear-btn');
-
-        // Function to set clear button to being active or not
-        function updateClearButtonState() {
-                const hasActiveFilter = 
-                        selectedCampus ||
-                        minPrice !== null ||
-                        maxPrice !== null ||
-                        selectedPricingType.length < 2 ||
-                        selectedBeds !== null ||
-                        selectedBaths !== null ||
-                        selectedBuildingType.length > 0;
-
-                // Show or hide the Clear button based on active filters
-                if (hasActiveFilter) {
-                        clearBtn.classList.add('active');
-                        clearBtn.style.cursor = 'pointer'; 
-                } else {
-                        clearBtn.classList.remove('active');
-                        clearBtn.style.cursor = 'not-allowed'; 
-                }
-        }
-        
-        // Clear function
-        function clearFilters() {
-                selectedCampus = null;
-                minPrice = null;
-                maxPrice = null;
-                selectedPricingType = ["Per Bedroom", "Per Unit"];
-                selectedBeds = null;
-                selectedBaths = null;
-                selectedBuildingType = [];
-                
-                // Reset UI inputs
-                document.querySelectorAll('.filter-dropdown input, .filter-bar input').forEach(input => {
-                        if (input.type === 'checkbox') {
-                                input.checked = selectedPricingType.includes(input.value);
-                        } else if (input.type === 'radio') {
-                                input.checked = input.value === 'Any';
+function addMobileListeners() {
+        document.querySelectorAll('.mobile-campus').forEach(item => {
+                item.addEventListener('change', () => {
+                        updateSelectedList(item, selectedMobileCampus);
+                        if (selectedMobileCampus.length === 2 || selectedMobileCampus.length === 0) {
+                                selectedCampus = null;
                         } else {
-                                input.value = '';
+                                selectedCampus = selectedMobileCampus[0];
                         }
                 });
-                
-                renderProperties(properties);
-                updateClearButtonState();
-        }
-        
-function addFilterEventListeners() {       
-        document.querySelector('.clear-btn').addEventListener('click', () => {
-                if (!document.querySelector('.clear-btn').classList.contains('active')) return;
-        
-                clearFilters();
+                syncFilters();
         });
 
-        // Event listeners for each filter
+        document.querySelector('.min-input.mobile-input').addEventListener('input', (e) => {
+                minMobilePrice = parseInt(e.target.value) || null;
+                syncFilters();
+        });
+
+        document.querySelector('.max-input.mobile-input').addEventListener('input', (e) => {
+                maxMobilePrice = parseInt(e.target.value) || null;
+                syncFilters();
+        });
+
+        document.querySelectorAll('.mobile-pricing-type input[type="checkbox"]').forEach(item => {
+                item.addEventListener('change', () => {
+                        handlePricingTypeChange(item);
+                });
+        });
+        
+        document.querySelectorAll('.mobile-beds input[name="beds"]').forEach(item => {
+                item.addEventListener('change', () => {
+                        selectedBeds = item.value;
+                });
+        });
+
+        document.querySelectorAll('.mobile-baths input[name="baths"]').forEach(item => {
+                item.addEventListener('change', () => {
+                        selectedBaths = item.value;
+                });
+        });
+
+        document.querySelectorAll('.mobile-building-type input[type="checkbox"]').forEach(item => {
+                item.addEventListener('change', () => {
+                        updateSelectedList(item, selectedBuildingType);
+                });
+                syncFilters();
+        });
+}
+
+function addDesktopListener() {       
         document.querySelectorAll('.dropdown--campus').forEach(item => {
                 item.addEventListener('click', () => {
                         selectedCampus = item.textContent;
@@ -310,20 +350,21 @@ function addFilterEventListeners() {
                 });
         });
 
-        document.querySelector('.min-input').addEventListener('input', (e) => {
-                minPrice = parseInt(e.target.value) || null;
+        document.querySelector('.min-input.desktop-input').addEventListener('input', (e) => {
+                minDesktopPrice = parseInt(e.target.value) || null;
+                syncFilters();
                 filterProperties();
         });
 
-        document.querySelector('.max-input').addEventListener('input', (e) => {
-                maxPrice = parseInt(e.target.value) || null;
+        document.querySelector('.max-input.desktop-input').addEventListener('input', (e) => {
+                maxDesktopPrice = parseInt(e.target.value) || null;
+                syncFilters();
                 filterProperties();
         });
 
         // Add event listeners for price range dropdown items
         document.querySelectorAll('.price-btn + .dropdown-content .dropdown-item').forEach(item => {
                 item.addEventListener('click', () => {
-                        // Extract the price range from the item's text
                         const priceRange = item.textContent.trim();
                         if (priceRange.includes('-')) {
                                 const [min, max] = priceRange.split('-').map(p => parseInt(p.replace('$', '').trim()));
@@ -333,16 +374,13 @@ function addFilterEventListeners() {
                                 minPrice = 2500;
                                 maxPrice = 10000;
                         }
-                
-                        // Update the input fields for min and max
                         document.querySelector('.min-input').value = minPrice ? `$${minPrice}` : '';
                         document.querySelector('.max-input').value = maxPrice ? `$${maxPrice}` : '';
-                
                         // Filter properties based on the selected price range
                         filterProperties();
                 });
         });
-    
+        
         document.querySelectorAll('.pricing-type-btn + .dropdown-content input[type="checkbox"]').forEach(item => {
                 item.addEventListener('change', () => {
                         handlePricingTypeChange(item);
@@ -372,42 +410,100 @@ function addFilterEventListeners() {
         });
 }
 
-
-        // Function to handle changes in pricing type selection
-        function handlePricingTypeChange(checkbox) {
-                if (checkbox.checked) {
-                        // If checked, add to the selectedPricingType list
-                        if (!selectedPricingType.includes(checkbox.value)) {
-                                selectedPricingType.push(checkbox.value);
-                        }
-                } else {
-                        // Ensure at least one type is always selected
-                        if (selectedPricingType.length > 1) {
-                                const index = selectedPricingType.indexOf(checkbox.value);
-                                if (index > -1) {
-                                        selectedPricingType.splice(index, 1);
-                                }
-                        } else {
-                                // Prevent unchecking the last option
-                                checkbox.checked = true;
-                        }
-                }
-        }
-
-        function updateSelectedList(checkbox, list) {
-                if (checkbox.checked) {
-                // Add to the list if not already included
+function updateSelectedList(checkbox, list) {
+        if (checkbox.checked) {
+        // Add to the list if not already included
                 if (!list.includes(checkbox.value)) {
                         list.push(checkbox.value);
                 }
-                } else {
-                        // Remove from the list if it's unchecked
-                        const index = list.indexOf(checkbox.value);
-                        if (index > -1) {
-                                list.splice(index, 1);
-                        }
+        } else {
+                // Remove from the list if it's unchecked
+                const index = list.indexOf(checkbox.value);
+                if (index > -1) {
+                        list.splice(index, 1);
                 }
         }
+}
+
+// Function to handle changes in pricing type selection
+function handlePricingTypeChange(checkbox) {
+        if (checkbox.checked) {
+                // If checked, add to the selectedPricingType list
+                if (!selectedPricingType.includes(checkbox.value)) {
+                        selectedPricingType.push(checkbox.value);
+                }
+        } else {
+                // Ensure at least one type is always selected
+                if (selectedPricingType.length > 1) {
+                        const index = selectedPricingType.indexOf(checkbox.value);
+                        if (index > -1) {
+                                selectedPricingType.splice(index, 1);
+                        }
+                } else {
+                        // Prevent unchecking the last option
+                        checkbox.checked = true;
+                }
+        }
+}
+
+
+// Clear function
+function clearFilters() {
+        selectedCampus = null;
+        minPrice = null;
+        maxPrice = null;
+        selectedPricingType = ["Per Bedroom", "Per Unit"];
+        selectedBeds = null;
+        selectedBaths = null;
+        selectedBuildingType = [];
+
+        // Reset UI inputs
+        document.querySelectorAll('.filter-dropdown input, .submenu input').forEach(input => {
+                if (input.type === 'checkbox') {
+                        input.checked = selectedPricingType.includes(input.value);
+                        input.checked = false;
+                } else if (input.type === 'radio') {
+                        input.checked = input.value === 'Any';
+                } else {
+                        input.value = '';
+                }        
+        });        
+        
+        renderProperties(properties);
+        updateClearButtonState();
+}        
+
+// Function to set clear button to being active or not
+function updateClearButtonState() {
+        const hasActiveFilter = 
+                selectedCampus ||
+                minPrice !== null ||
+                maxPrice !== null ||
+                selectedPricingType.length < 2 ||
+                selectedBeds !== null ||
+                selectedBaths !== null ||
+                selectedBuildingType.length > 0;
+
+        // Show or hide the Clear button based on active filters        
+        const clearButtons = document.querySelectorAll('.clear-btn');
+        clearButtons.forEach(btn => {
+                if (hasActiveFilter) {
+                        btn.classList.add('active');
+                        btn.style.cursor = 'pointer';
+                } else {
+                        btn.classList.remove('active');
+                        btn.style.cursor = 'not-allowed';
+                }
+        });      
+}        
+
+// Synchronize filters between mobile and desktop
+function syncFilters() {
+        minPrice = minMobilePrice || minDesktopPrice;
+        maxPrice = maxMobilePrice || maxDesktopPrice;
+
+        updateClearButtonState();
+}
 
 // Function to filter properties based on selected filters
 function filterProperties() {
@@ -445,7 +541,8 @@ function filterProperties() {
         // Update the Clear button state
         updateClearButtonState();
 }
-
+    
         renderProperties(properties);
         updateClearButtonState();
-        addFilterEventListeners();
+        addMobileListeners();
+        addDesktopListener();

@@ -14,30 +14,30 @@
 
 
         <!-- Mobile Filter Button -->
-        <div class="filter-bar">
+        <div class="filter-bar mobile-filters">
                 <div class="filter-dropdown">
-                        <button class="dropdown-btn">Filter</button>
-                        <div class="dropdown-content">
+                        <button class="dropdown-btn" id="mobile-filter-btn">Filter</button>
+                        <div class="dropdown-content" id="mobile-filter-content">
                                 <h2>Campus</h2>
                                 <div class="submenu">
-                                        <label><input type="checkbox"> Medford/Somerville</label>
-                                        <label><input type="checkbox"> Boston</label>
+                                        <label><input type="checkbox" class="mobile-campus" value="Medford/Somerville"> Medford/Somerville</label>
+                                        <label><input type="checkbox" class="mobile-campus" value="Boston"> Boston</label>
                                 </div>
                                 <h2>Price</h2>
                                 <div class="submenu">
                                         <div class="min-max-container">
-                                                <input type="text" placeholder="Min." class="min-input">
+                                                <input type="text" placeholder="Min." class="min-input mobile-input">
                                                 <span class="dash"> - </span>
-                                                <input type="text" placeholder="Max." class="max-input">
+                                                <input type="text" placeholder="Max." class="max-input mobile-input">
                                         </div>
                                 </div>
                                 <h2>Pricing Type</h2>
-                                <div class="submenu">
-                                        <label><input type="checkbox"> Per Bedroom</label>
-                                        <label><input type="checkbox"> Per Unit</label>
+                                <div class="submenu mobile-pricing-type">
+                                        <label><input type="checkbox" value="Per Bedroom" checked> Per Bedroom</label>
+                                        <label><input type="checkbox" value="Per Unit" checked> Per Unit</label>
                                 </div>
                                 <h2>Beds</h2>
-                                <div class="submenu">
+                                <div class="submenu mobile-beds">
                                         <label><input type="radio" name="beds" value="Any"> Any</label>
                                         <label><input type="radio" name="beds" value="Studio"> Studio</label>
                                         <label><input type="radio" name="beds" value="1"> 1</label>
@@ -47,37 +47,39 @@
                                 </div>
 
                                 <h2>Baths</h2>
-                                <div class="submenu">
+                                <div class="submenu mobile-baths">
                                         <label><input type="radio" name="baths" value="Any"> Any</label>
                                         <label><input type="radio" name="baths" value="1"> 1</label>
                                         <label><input type="radio" name="baths" value="2"> 2</label>
                                         <label><input type="radio" name="baths" value="3+"> 3+</label>
                                 </div>
                                 <h2>Building Type</h2>
-                                <div class="submenu">
-                                        <label><input type="checkbox"> Apartment</label>
-                                        <label><input type="checkbox"> House</label>
-                                        <label><input type="checkbox"> Condo</label>
-                                        <label><input type="checkbox"> Townhouse</label>
-                                        <label><input type="checkbox"> Duplex</label>
-                                        <label><input type="checkbox"> Triplex</label>
+                                <div class="submenu mobile-building-type">
+                                        <label><input type="checkbox" value="Apartment"> Apartment</label>
+                                        <label><input type="checkbox" value="House"> House</label>
+                                        <label><input type="checkbox" value="Condo"> Condo</label>
+                                        <label><input type="checkbox" value="Townhouse"> Townhouse</label>
+                                        <label><input type="checkbox" value="Duplex"> Duplex</label>
+                                        <label><input type="checkbox" value="Triplex"> Triplex</label>
                                 </div>
-                                <div class="filter-actions">
-                                        <button class="clear-btn">Clear</button>
+                                <div class="filter-actions" id="filter-btn">
+                                        <button class="clear-btn mobile-clear">Clear</button>
                                         <button class="done-btn">Done</button>
                                 </div>
                         </div>
                 </div>
         </div>
+        
+
 
         <!-- Search Bar Below Navigation -->
-        <div class="search-bar">
+        <div class="search-bar desktop-filters">
                 <!-- Campus Dropdown -->
                 <div class="filter-dropdown">
                         <button class="dropdown-btn campus-btn">Campus <span>&#x25BC;</span></button>
                         <div class="dropdown-content">
-                                <div class="dropdown-item">Medford/Somerville</div>
-                                <div class="dropdown-item">Boston</div>
+                                <div class="dropdown-item dropdown--campus">Medford/Somerville</div>
+                                <div class="dropdown-item dropdown--campus">Boston</div>
                         </div>
                 </div>
 
@@ -86,9 +88,9 @@
                         <button class="dropdown-btn price-btn">Price <span>&#x25BC;</span></button>
                         <div class="dropdown-content">
                                 <div class="min-max-container">
-                                        <input type="text" placeholder="Min." class="min-input">
+                                        <input type="text" placeholder="Min." class="min-input desktop-input">
                                         <span class="dash"> - </span>
-                                        <input type="text" placeholder="Max." class="max-input">
+                                        <input type="text" placeholder="Max." class="max-input desktop-input">
                                 </div>
                                 <div class="dropdown-item">$500 - 850$</div>
                                 <div class="dropdown-item">$850 - 1000$</div>
@@ -144,8 +146,7 @@
                 <!-- Section for Clear and Favorites buttons -->
                 <div class="filter-dropdown">
                         <div class="action-section">
-
-                                <button class="clear-btn">Clear</button>
+                                <button class="clear-btn desktop-clear">Clear</button>
                                 <button class="favorites-btn" id="favorites-filter-btn">
                                         <img id="favorites-icon" src="img/base_heart.png" alt="Favorites" class="favorites-icon" />
                                         <span class="favorites-count" id="favorite-count">0</span>
