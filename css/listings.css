@@ -149,6 +149,15 @@ body {
             border-color: #000;
         }
 
+        .favorites-btn.active {
+                color: #000; 
+                cursor: pointer;
+                border-color: #000;
+        }
+        
+        .favorites-btn.active:hover {
+                background-color: #e6e6e6;
+        }
 
         .favorites-icon {
                 width: 20px;

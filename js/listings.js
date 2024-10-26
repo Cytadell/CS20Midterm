@@ -206,8 +206,9 @@ function renderProperties(properties) {
                         <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
                         <div class="property-header">
                                 <span class="date-posted">${property.datePosted}</span>
-                                <img src="img/base_heart.png" alt="Favorite" class="fav-icon" 
-                                onclick="toggleFavorite(this)" /> <!-- Heart icon -->
+                                <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
+                                alt="Favorite" class="fav-icon" 
+                                onclick="toggleFavorite(this, ${property.id})" /> <!-- Heart icon -->
                         </div>
                         <div class="property-details">
                                 <h3 class="property-title">${property.title}</h3>
@@ -225,16 +226,73 @@ function renderProperties(properties) {
         `;
         propertyList.innerHTML += propertyCard;
         });
-}
-// Function to toggle the heart icon
-function toggleFavorite(icon) {
-        if (icon.src.includes('base_heart.png')) {
-                icon.src = 'img/full_heart.png';
-        } else {
-                icon.src = 'img/base_heart.png';
-        }
+        updateFavoriteCount();
 }
 
+let favoriteCount = 0;
+
+// Function to toggle the heart icon
+function toggleFavorite(icon, propertyId) {
+        // Find the property in the list and update its favorite status
+        const property = properties.find(p => p.id === propertyId);
+
+        if (icon.src.includes('base_heart.png')) {
+                icon.src = 'img/full_heart.png';
+                if (property) {
+                        property.isFavorite = true;
+                }
+                favoriteCount++;
+        } else {
+                icon.src = 'img/base_heart.png';
+                if (property) {
+                        property.isFavorite = false;
+                }
+        favoriteCount--;
+        }
+    
+        updateFavoriteCount();
+}
+
+function updateFavoriteCount() {
+        const favoriteCountElement = document.getElementById('favorite-count');
+        const favoriteBtn = document.getElementById('favorites-filter-btn');
+        const favoriteIcon = document.getElementById('favorites-icon');
+
+        if (favoriteCountElement) {
+                favoriteCountElement.textContent = favoriteCount;
+        }
+
+        // Enable/disable the favorites button
+        if (favoriteCount > 0) {
+                favoriteBtn.classList.add('active');
+                favoriteBtn.style.cursor = 'pointer';
+                if (favoriteIcon) {
+                        favoriteIcon.src = 'img/full_heart.png'; // Change to full heart when active
+                }
+
+        } else {
+                favoriteBtn.classList.remove('active');
+                favoriteBtn.style.cursor = 'not-allowed';
+                if (favoriteIcon) {
+                        favoriteIcon.src = 'img/base_heart.png'; // Revert to base heart when inactive
+                }
+        }
+        updateClearButtonState();
+}
+
+
+document.getElementById('favorites-filter-btn').addEventListener('click', () => {
+        const favoriteBtn = document.getElementById('favorites-filter-btn');
+
+        // If the button is not active, do nothing
+        if (!favoriteBtn.classList.contains('active')) return;
+
+        // Filter and display only favorited properties
+        const favoritedProperties = properties.filter(property => property.isFavorite);
+        renderProperties(favoritedProperties);
+});
+
+    
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -456,6 +514,12 @@ function clearFilters() {
         selectedBeds = null;
         selectedBaths = null;
         selectedBuildingType = [];
+        favoriteCount = 0;
+        // Reset all properties' favorite status
+        properties.forEach(property => {
+                property.isFavorite = false;
+        });
+
 
         // Reset UI inputs
         document.querySelectorAll('.filter-dropdown input, .submenu input').forEach(input => {
@@ -471,6 +535,7 @@ function clearFilters() {
         
         renderProperties(properties);
         updateClearButtonState();
+        updateFavoriteCount();
 }        
 
 // Function to set clear button to being active or not
@@ -482,7 +547,8 @@ function updateClearButtonState() {
                 selectedPricingType.length < 2 ||
                 selectedBeds !== null ||
                 selectedBaths !== null ||
-                selectedBuildingType.length > 0;
+                selectedBuildingType.length > 0 ||
+                favoriteCount !== 0;
 
         // Show or hide the Clear button based on active filters        
         const clearButtons = document.querySelectorAll('.clear-btn');
