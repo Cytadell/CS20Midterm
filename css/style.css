@@ -34,7 +34,6 @@ body {
 
 .desc-box-1 {
     padding: 50px;
-    width: auto;
     display: flex;
     justify-content: center;
     align-items: stretch; 
@@ -63,7 +62,6 @@ body {
 }
 
 .desc-box-2 {
-    height: 100%;
     margin: 50px;
     padding: 50px;
     text-align: center;
@@ -90,6 +88,50 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+.desc-box-3 {
+    display: grid;
+    place-items: center;
+    grid-template-rows: auto auto auto auto;
+    gap: 50px;
+    padding: 50px;
+    text-align: center;
+    line-height: 2;
+    background-color: rgb(87, 41, 13);
+}
+
+.desc-box-3head {
+    width: 70%;
+    padding: 30px;
+    font-size: 200%;
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.desc-box-3review {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.desc-bos-3img {
+    max-height: 607px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.desc-box-3txt {
+    font-size: 150%;
+    padding: 30px;
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
 }
 
 .footer {
