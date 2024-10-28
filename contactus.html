@@ -25,9 +25,10 @@
         align-items: center;
         background-color: #fff;
         padding: 40px;
-        border-radius: 10px;
+        border-radius: 25px;
         min-width: 500px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 10px solid rgb(63, 171, 218);
     }
 
     form {
@@ -36,8 +37,7 @@
         display: inline-block;
         border-radius: 10px;
         padding: 20px;
-        width: 100%;
-        max-width: 800px;
+        width: 470px;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     }
 
@@ -59,8 +59,23 @@
         box-sizing: border-box;
     }
 
+    button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(87, 41, 13);
+        color: white;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #5a2d0f;
+    }
+
     input[type="submit"] {
-        background-color: #333;
+        background-color: rgb(87, 41, 13);
         color: white;
         border: none;
         width: 100%;
@@ -69,27 +84,34 @@
     }
 
     input[type="submit"]:hover {
-        background-color: #555;
-    }
-
-    button {
-        font-size: 20px;
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: #333;
-        color: white;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #555;
+        background-color: #5a2d0f;
     }
 
     p {
         font-size: 22px;
         color: #333;
+    }
+
+    .error-message {
+            color: #ff0000;
+            font-size: 16px;
+            margin-bottom: 10px;
+            display: none;
+        }
+
+    .thank-you-message {
+        display: none;
+        font-size: 22px;
+        color: #000000;
+    }
+
+    @media(max-width: 400px) {
+            .formBody{
+                width: 400px;
+            }
+            form{
+                width: 375px;
+            }
     }
 
 </style>
@@ -124,54 +146,78 @@
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            function showForm(userType) {
-                $('.button-container').fadeOut(function () {
-                    let formHTML = '';
-                    if (userType === 'renter') {
-                        formHTML = `
-                        <form id="renterForm">
-                                <label for="renterName">Name:</label>
-                                <input type="text" id="renterName" name="renterName"><br>
-                                <label for="rphone">Phone Number:</label>
-                                <input type="text" id="rphone" name="rphone"><br>
-                                <label for="renterEmail">Email:</label>
-                                <input type="email" id="renterEmail" name="renterEmail"><br>
-                                <label for="state">Where would you like to rent?:</label>
-                                <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
-                                <label for="renterMessage">Message:</label><br>
-                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                                <input type="submit" value="Submit">
-                        </form>
-                                <datalist id="houses">
-                                    <option value="Home1" />
-                                    <option value="Home2" />
-                                    <option value="Home3" />
-                                    <option value="Home4" />
-                                    <option value="Home5" />
-                                    <option value="Home6" />
-                                    <option value="Home7" />
-                                    <option value="Home8" />
-                                    <option value="Home9" />
-                                    <option value="Home10" />
-                                </datalist>
-                        `;
-                    } else if (userType === 'landlord') {
-                        formHTML = `
-                        <form id="renterForm">
-                                <label for="renterName">Name:</label>
-                                <input type="text" id="renterName" name="renterName"><br>
-                                <label for="rphone">Phone Number:</label>
-                                <input type="text" id="rphone" name="rphone"><br>
-                                <label for="renterEmail">Email:</label>
-                                <input type="email" id="renterEmail" name="renterEmail"><br>
-                                <label for="renterMessage">Message:</label><br>
-                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                                <input type="submit" value="Submit">
-                        </form>
-                        `;
-                    }
-                    $('.formBody').html(formHTML).fadeIn();
-                });
-        }
-        </script>
+<script>
+    function showForm(userType) {
+        $('.button-container').fadeOut(function () {
+            let formHTML = '';
+            if (userType === 'renter') {
+                formHTML = `
+                <form id="renterForm">
+                    <div class="error-message" id="error-message">Please fill in all fields.</div>
+                    <label for="renterName">Name:</label>
+                    <input type="text" id="renterName" name="renterName"><br>
+                    <label for="rphone">Phone Number:</label>
+                    <input type="text" id="rphone" name="rphone"><br>
+                    <label for="renterEmail">Email:</label>
+                    <input type="email" id="renterEmail" name="renterEmail"><br>
+                    <label for="state">Where would you like to rent?:</label>
+                    <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
+                    <label for="renterMessage">Message(Optional):</label><br>
+                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                    <input type="submit" value="Submit">
+                </form>
+                <datalist id="houses">
+                    <option value="Home1" />
+                    <option value="Home2" />
+                    <option value="Home3" />
+                    <option value="Home4" />
+                    <option value="Home5" />
+                    <option value="Home6" />
+                    <option value="Home7" />
+                    <option value="Home8" />
+                    <option value="Home9" />
+                    <option value="Home10" />
+                </datalist>
+                <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
+                `;
+            } else if (userType === 'landlord') {
+                formHTML = `
+                <form id="renterForm">
+                    <div class="error-message" id="error-message">Please fill in all fields.</div>
+                    <label for="renterName">Name:</label>
+                    <input type="text" id="renterName" name="renterName"><br>
+                    <label for="rphone">Phone Number:</label>
+                    <input type="text" id="rphone" name="rphone"><br>
+                    <label for="renterEmail">Email:</label>
+                    <input type="email" id="renterEmail" name="renterEmail"><br>
+                    <label for="renterMessage">Message(Optional):</label><br>
+                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                    <input type="submit" value="Submit">
+                </form>
+                <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
+                `;
+            }
+            
+            $('.formBody').html(formHTML).fadeIn();
+
+            document.querySelector('#renterForm').addEventListener("submit", function(event) {
+                const errorMessage = document.getElementById('error-message');
+                const thankYouMessage = document.getElementById('thank-you-message');
+                const nameInput = document.getElementById('renterName');
+                const phoneInput = document.getElementById('rphone');
+                const emailInput = document.getElementById('renterEmail');
+                
+                if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
+                    event.preventDefault();
+                    errorMessage.style.display = "block";
+                } else {
+                    event.preventDefault();
+                    errorMessage.style.display = "none";
+                    $('#renterForm').fadeOut(function() {
+                        thankYouMessage.style.display = "block";
+                    });
+                }
+            });
+        });
+    }
+</script>
