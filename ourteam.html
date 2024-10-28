@@ -11,6 +11,23 @@
         align-items: center;
     }
 
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    #navbar-placeholder {
+        width: 100%;
+        margin: 0;
+        padding: 0; 
+    }
+
+    header {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
     h1 {
         font-size: 40px;
         text-align: center;
@@ -38,6 +55,7 @@
         max-width: 1300px;
         width: 90%;
         margin: 0 auto;
+        border: 10px solid rgb(63, 171, 218);
     }
 
     .profile img {
@@ -62,6 +80,44 @@
     figure {
         clear: both;
     }
+
+    @media (max-width: 500px) {
+        h1 {
+            font-size: 28px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+
+        .profile {
+            flex-direction: column;
+            max-width: 90%;
+            width: 100%;
+            margin: 10px auto;
+        }
+
+        .profile img {
+            border-radius: 15px;
+            margin-bottom: 10px;
+            width: 100%;
+        }
+
+        .profile h3 {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .profile p {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+    }
+
 </style>
 
 <html lang="en">
@@ -70,6 +126,7 @@
 </head>
 
 <body>
+    <div id="navbar-placeholder"></div>
     <h1>Our Team</h1>
     <ul>
         <li class="profile">
@@ -116,6 +173,7 @@
             </div>
         </li>
     </ul>
+    <script src="js/loadNavbar.js" defer></script>
 </body>
 
 </html>

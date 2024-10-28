@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <style>
+    
     body {
         background-color: #f0f0f0;
         font-family: Arial, sans-serif;
@@ -9,8 +10,22 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        height: auto;
+    }
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    #navbar-placeholder {
+        width: 100%;
+        margin: 0;
+        padding: 0; 
+    }
+
+    header {
+        width: 100%;
+        padding: 0;
+        margin: 0;
     }
 
     h1 {
@@ -71,7 +86,7 @@
     }
 
     button:hover {
-        background-color: #5a2d0f;
+        background-color: rgb(58, 28, 9);
     }
 
     input[type="submit"] {
@@ -84,7 +99,7 @@
     }
 
     input[type="submit"]:hover {
-        background-color: #5a2d0f;
+        background-color: rgb(58, 28, 9);
     }
 
     p {
@@ -105,13 +120,42 @@
         color: #000000;
     }
 
-    @media(max-width: 400px) {
-            .formBody{
-                width: 400px;
-            }
-            form{
-                width: 375px;
-            }
+    @media(max-width: 500px) {
+        h1 {
+            font-size: 28px;
+            margin-top: 50px;
+        }
+
+        .formBody {
+            width: 90%;
+            min-width: 0;
+            padding: 20px;
+        }
+
+        form {
+            width: 100%;
+            padding: 15px;
+        }
+
+        label {
+            font-size: 16px; 
+        }
+
+        input, textarea {
+            font-size: 16px;
+        }
+
+        button {
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .error-message,.thank-you-message {
+            font-size: 16px;
+        }
     }
 
 </style>
@@ -120,10 +164,6 @@
     <head>
         <title>Contact Us</title>
     </head>
-
-    <header>
-        
-    </header>
 
     <body>
         <div id="navbar-placeholder"></div>
@@ -153,7 +193,6 @@
             if (userType === 'renter') {
                 formHTML = `
                 <form id="renterForm">
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
                     <label for="renterName">Name:</label>
                     <input type="text" id="renterName" name="renterName"><br>
                     <label for="rphone">Phone Number:</label>
@@ -164,6 +203,7 @@
                     <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
                     <label for="renterMessage">Message(Optional):</label><br>
                     <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                    <div class="error-message" id="error-message">Please fill in all fields.</div>
                     <input type="submit" value="Submit">
                 </form>
                 <datalist id="houses">
@@ -183,7 +223,6 @@
             } else if (userType === 'landlord') {
                 formHTML = `
                 <form id="renterForm">
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
                     <label for="renterName">Name:</label>
                     <input type="text" id="renterName" name="renterName"><br>
                     <label for="rphone">Phone Number:</label>
@@ -192,6 +231,7 @@
                     <input type="email" id="renterEmail" name="renterEmail"><br>
                     <label for="renterMessage">Message(Optional):</label><br>
                     <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                    <div class="error-message" id="error-message">Please fill in all fields.</div>
                     <input type="submit" value="Submit">
                 </form>
                 <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
