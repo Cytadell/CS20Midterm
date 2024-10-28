@@ -4,12 +4,6 @@ body {
     background-color: rgb(63, 171, 218);
 }
 
-.home-header {
-    width: 100%;
-    height: 115.54px;
-    background-color: rgb(87, 41, 13);
-}
-
 .header-picture {
     width: 100%;
     height: 350px;
@@ -47,7 +41,7 @@ body {
     gap: 5%;
     font-size: 130%;
     line-height: 2;
-    background-color: rgb(87, 41, 13);;
+    background-color: rgb(87, 41, 13);
 }
 
 .desc-box-1img {
@@ -69,6 +63,7 @@ body {
 }
 
 .desc-box-2 {
+    height: 100%;
     margin: 50px;
     padding: 50px;
     text-align: center;
@@ -79,15 +74,130 @@ body {
 }
 
 .desc-box-2grid {
+    max-height: 1075px;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 0.5fr;
     grid-template-columns: 1fr 1fr 1fr; 
-    gap: 40px;
+    column-gap: 40px;
+    row-gap: 40px;
     padding: 20px;
+}
+
+.commitment-img {
+    width: 100%;
+    max-height: 607px;
+    aspect-ratio: 1 / 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.footer {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 25px;
+    color: white;
+    background-color: rgb(87, 41, 13);
 }
 
 @media(max-width: 1550px) {
     .picture-textbox {
         font-size: 30px;
+    }
+}
+
+@media(max-width: 1350px) {
+    .desc-box-2grid {
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr; 
+    }
+
+    .commitment-img {
+        display: none;
+    }
+}
+
+@media(max-width: 1340px) {
+    .picture-textbox {
+        font-size: 24px;
+    }
+}
+
+@media(max-width: 1130px) {
+    .desc-box-2 {
+        font-size: 100%;
+    }
+}
+
+@media(max-width: 1120px) {
+    .picture-textbox {
+        font-size: 18px;
+    }
+}
+
+@media(max-width: 900px) {
+    .desc-box-1img {
+        display: none;
+    }
+
+    .desc-box-1txt {
+        width: 100%;
+    }
+}
+
+@media(max-width: 685px) {
+    .desc-box-2grid {
+        row-gap: 10px;
+    }
+}
+
+@media(max-width: 650px) {
+    .desc-box-2 {
+        font-size: 90%;
+    }
+}
+
+@media(max-width: 600px) {
+    .picture-textbox {
+        padding: 25px;
+    }
+
+    .desc-box-2 {
+        max-height: none;
+    }
+}
+
+@media(max-width: 560px) {
+    .desc-box-1 {
+        font-size: 115%;
+    }
+
+    .desc-box-2 {
+        font-size: 75%;
+    }
+}
+
+@media(max-width: 490px) {
+    .desc-box-1 {
+        font-size: 100%;
+    }
+}
+
+@media(max-width: 455px) {
+    .desc-box-1 {
+        font-size: 90%;
+    }
+
+    .desc-box-2 {
+        padding: 10px;
+    }
+}
+
+@media(max-width: 425px) {
+    .picture-textbox {
+        font-size: 14px;
     }
 }
