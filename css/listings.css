@@ -182,6 +182,11 @@ body {
                 padding: 20px;
         }
         
+        .property-link {
+                text-decoration: none;
+                color: inherit;
+        }
+            
         .property-card {
                 border: 1px solid #ccc;
                 border-radius: 8px;

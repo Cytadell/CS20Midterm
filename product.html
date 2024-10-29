@@ -5,6 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Property Details</title>
         <link rel="stylesheet" href="css/product.css">
+        <!-- JavaScript for loading property details -->
+        <script src="js/properties.js" defer></script>
+        <script src="js/product.js" defer></script>
+        <script src="js/loadNavbar.js" defer></script>
 </head>
 <body>
 
@@ -15,10 +19,10 @@
         <div id="property-details-container" class="property-details-container">
                 <!-- Property details will be loaded here dynamically -->
         </div>
-
-        <!-- JavaScript for loading property details -->
-        <script src="js/loadNavbar.js" defer></script>
-        <script src="js/product.js" defer></script>
+        <!-- Back Button -->
+        <div class="back-btn-container">
+                <button id="back-btn" class="back-btn" onclick="goBack()">Back</button>
+        </div>
 
 </body>
 </html>
