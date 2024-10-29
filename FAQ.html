@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Property Listings</title>
+    <link rel="stylesheet" href="css/faq.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            color: #000;
+            margin-bottom: 30px;
+        }
+
+        .faq-frame {
+            padding: 20px;
+            border: 5px solid #333;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-section {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .faq-section h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .faq-section p {
+            display: none;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #666;
+        }
+
+        .faq-section.active p {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="navbar-placeholder"></div>
+
+    <div class="container">
+        <h1>Frequently Asked Questions</h1>
+        <div class="faq-frame">
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>How do I contact a landlord?</h2>
+                <p>Each property listing includes a "Contact Owner" button. Click this button to send a message directly to the landlord or property manager.</p>
+            </div>
+
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>How do I find properties near campus?</h2>
+                <p>Use the campus filter on the "Listings" page or view our interactive map, where you can see property locations near campus. Filter listings by proximity to find the most convenient options.</p>
+            </div>
+
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>How do I use the interactive map?</h2>
+                <p>On the map page, you can zoom in and out with the "+" and "-" buttons. Click any red dot to view details about that property listing.</p>
+            </div>
+
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>How do I filter properties by price, rooms, or type?</h2>
+                <p>Go to the "Listings" page, where youll find filters for price, number of bedrooms, and building type. Use these filters to find properties that meet your specific requirements.</p>
+            </div>
+
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>How do I view the website on mobile?</h2>
+                <p>This website is mobile-friendly, so you can access it on your phone or tablet. The interactive map and property listings are optimized for smaller screens.</p>
+            </div>
+
+            <div class="faq-section" onclick="toggleFAQ(this)">
+                <h2>What if I experience issues with the map or listings?</h2>
+                <p>If you encounter any issues, please use the contact form on our support page. Our team will respond as soon as possible to help resolve any technical problems.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loadNavbar.js" defer></script>
+    <script>
+        function toggleFAQ(section) {
+            section.classList.toggle("active");
+        }
+    </script>
+
+</body>
+</html>
