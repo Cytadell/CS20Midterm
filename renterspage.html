@@ -162,12 +162,13 @@
 
 <html>
     <head>
-        <title>Contact Us</title>
+        <title>Find a Place with Us</title>
     </head>
 
     <body>
         <div id="navbar-placeholder"></div>
-        <h1 style="margin-top: 100px;">Contact Us</h1>
+        <h1 style="margin-top: 100px;">Looking to Find a Place with Us?</h1>
+        <h2>Contact Us</h2>
         <div class="formBody">
             <form id="renterForm">
                 <label for="renterName">Name:</label>
@@ -177,26 +178,39 @@
                 <label for="renterEmail">Email:</label>
                 <input type="email" id="renterEmail" name="renterEmail"><br>
                 <label for="state">Where would you like to rent?:</label>
-                <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
-                <label for="renterMessage">Message(Optional):</label><br>
+                <input list="houses" id="state" name="houses"/>
+                <label for="renterMessage">Message (Optional):</label><br>
                 <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
                 <div class="error-message" id="error-message">Please fill in all fields.</div>
                 <input type="submit" value="Submit">
             </form>
             <datalist id="houses">
-                <option value="Home1" />
-                <option value="Home2" />
-                <option value="Home3" />
-                <option value="Home4" />
-                <option value="Home5" />
-                <option value="Home6" />
-                <option value="Home7" />
-                <option value="Home8" />
-                <option value="Home9" />
-                <option value="Home10" />
+                <option value="15 Saint James Avenue" />
+                <option value="240 Sidney St" />
+                <option value="100-150 Exchange St" />
+                <option value="101 Mill Rd" />
+                <option value="114 Yorktown Street" />
+                <option value="235 Old Colony Ave" />
+                <option value="34 Chetwynd Road" />
+                <option value="50 Clarendon St" />
+                <option value="75 Park St" />
+                <option value="200 Mystic Ave" />
+                <option value="40 Charles St" />
+                <option value="55 Pearl St" />
+                <option value="112 Mill St" />
+                <option value="210 River St" />
+                <option value="30 Elm St" />
+                <option value="75 Riverside Ave" />
+                <option value="160 Highland Ave" />
+                <option value="270 Broadway" />
+                <option value="85 Columbus Ave" />
+                <option value="67 Summit St" />
+                <option value="22 Victory Rd" />
+                <option value="78 Central St" />
+                <option value="12 Canal St" />
+                <option value="5 Union Sq" />
             </datalist>
-            <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
-            `;
+            <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
         </div>
 
         <script src="js/loadNavbar.js" defer></script>
