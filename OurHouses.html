@@ -3,18 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Houses</title>
+    <title>Interactive Map</title>
     <link rel="stylesheet" href="css/listings.css">
     <style>
+        body {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .map-frame {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto; 
+            border: 5px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+       
         .map-container {
             position: relative;
             width: 100%;
-            height: calc(100vh - 60px);
-            background-image: url('img/OurProperties.png');
-            background-size: cover;
-            background-position: center;
-            margin-top: 60px;
+            height: 600px;
+            overflow: hidden;
+            border-radius: 10px;
         }
+
+        .map {
+    background-image: url('img/OurProperties.png');
+    background-size: cover;
+    background-position: center top;
+    width: 100%;
+    height: 100%;
+    transform-origin: center center;
+    margin-top: -25px; /* Move the image up by about 1 inch */
+}
 
         .dot {
             position: absolute;
@@ -24,57 +50,120 @@
             border-radius: 50%;
             cursor: pointer;
         }
-        
 
         .dot:hover {
             background-color: darkred;
             transform: scale(1.2);
             transition: transform 0.2s;
         }
+
+        
+        .zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .zoom-button {
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px 0;
+            border-radius: 5px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
+
     <div id="navbar-placeholder"></div>
-    <div class="map-container" id="mapContainer">
-</div>
 
-<script>
-    const mapContainer = document.getElementById('mapContainer');
+    <div class="map-frame">
+        <div class="map-container" id="mapContainer">
+            <div class="map" id="map">
+            </div>
+        </div>
+    </div>
 
-    const housePositions = [
-        { top: '12%', left: '2%' }, { top: '14%', left: '14%' }, { top: '18%', left: '15%' },
-        { top: '40%', left: '50%' }, { top: '50%', left: '60%' }, { top: '60%', left: '20%' },
-        { top: '15%', left: '25%' }, { top: '25%', left: '35%' }, { top: '35%', left: '55%' },
-        { top: '45%', left: '65%' }, { top: '55%', left: '75%' }, { top: '65%', left: '35%' },
-        { top: '10%', left: '65%' }, { top: '20%', left: '75%' }, { top: '30%', left: '85%' },
-        { top: '40%', left: '25%' }, { top: '50%', left: '35%' }, { top: '60%', left: '45%' },
-        { top: '70%', left: '55%' }, { top: '80%', left: '65%' }, { top: '90%', left: '25%' },
-        { top: '70%', left: '15%' }, { top: '80%', left: '30%' }, { top: '90%', left: '50%' }
-    ];
-
-    // Loop to create 24 houses (dots)
-    for (let i = 1; i <= 24; i++) {
-        const dot = document.createElement('div');
-        dot.className = `dot dot${i}`;
-        dot.setAttribute('data-listing-index', i);
-
-        // Set dynamic positioning for the dots
-        const position = housePositions[i - 1];
-        dot.style.top = position.top;
-        dot.style.left = position.left;
-
-        // Append the dot to the map container
-        mapContainer.appendChild(dot);
-    }
-</script>
+    <div class="zoom-controls">
+        <button class="zoom-button" onclick="zoomIn()">+</button>
+        <button class="zoom-button" onclick="zoomOut()">-</button>
+    </div>
 
     <script>
-        document.querySelectorAll('.dot').forEach(dot => {
-            dot.addEventListener('click', function() {
-                const index = this.getAttribute('data-listing-index');
-                window.location.href = `listings.html?listing=${index}`;
-            });
+        const map = document.getElementById('map');
+        const mapContainer = document.getElementById('mapContainer');
+        let scale = 1; // Initial scale for zoom
+        let posX = 0; // Initial horizontal position for panning
+        let posY = 0; // Initial vertical position for panning
+        const zoomFactor = 0.2; // Amount to zoom in/out
+
+        // Zoom In Function
+        function zoomIn() {
+            scale += zoomFactor;
+            updateTransform();
+        }
+
+        // Zoom Out Function
+        function zoomOut() {
+            scale = Math.max(1, scale - zoomFactor); 
+            updateTransform();
+        }
+
+        // Update map transformations for zoom and pan
+        function updateTransform() {
+            map.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+        }
+
+        // Pan the map by dragging
+        let isPanning = false;
+        let startX, startY;
+
+        map.addEventListener('mousedown', (e) => {
+            isPanning = true;
+            startX = e.clientX - posX;
+            startY = e.clientY - posY;
+            map.style.cursor = 'grabbing';
         });
+
+        mapContainer.addEventListener('mousemove', (e) => {
+            if (!isPanning) return;
+            posX = e.clientX - startX;
+            posY = e.clientY - startY;
+            updateTransform();
+        });
+
+        document.addEventListener('mouseup', () => {
+            isPanning = false;
+            map.style.cursor = 'grab';
+        });
+
+        const housePositions = [
+            { top: '10%', left: '15%' }, { top: '20%', left: '30%' }, { top: '30%', left: '45%' },
+            { top: '40%', left: '50%' }, { top: '50%', left: '60%' }, { top: '60%', left: '20%' },
+            { top: '15%', left: '25%' }, { top: '25%', left: '35%' }, { top: '35%', left: '55%' },
+            { top: '45%', left: '65%' }, { top: '55%', left: '75%' }, { top: '65%', left: '35%' },
+            { top: '10%', left: '65%' }, { top: '20%', left: '75%' }, { top: '30%', left: '85%' },
+            { top: '40%', left: '25%' }, { top: '50%', left: '35%' }, { top: '60%', left: '45%' },
+            { top: '70%', left: '55%' }, { top: '80%', left: '65%' }, { top: '90%', left: '25%' },
+            { top: '70%', left: '15%' }, { top: '80%', left: '30%' }, { top: '90%', left: '50%' }
+        ];
+
+        for (let i = 1; i <= 24; i++) {
+            const dot = document.createElement('div');
+            dot.className = `dot dot${i}`;
+            dot.setAttribute('data-listing-index', i);
+            const position = housePositions[i - 1];
+            dot.style.top = position.top;
+            dot.style.left = position.left;
+
+            map.appendChild(dot);
+        }
     </script>
 
     <script src="js/loadNavbar.js" defer></script>
