@@ -20,7 +20,7 @@ const properties = [
         { 
                 id: 3, title: "The Exchange Street Apartments", address: "100-150 Exchange St, Malden, MA 02148",
                 type: "Studio - 2 Beds", price: "$2,380 - $3,710", distance: "3.2 miles to Medford/Somerville",
-                imageUrl: "img/house_3.png", datePosted: "1 Day Ago", phone: "(857) 345-6789",
+                imageUrl: "img/house_3.jpg", datePosted: "1 Day Ago", phone: "(857) 345-6789",
                 
                 campus: "Boston", perBedroomPrice: 1190, pricingType: "Per Bedroom", 
                 buildingType: "Duplex", beds: "2", baths: "1.5", isFavorite: false 
@@ -36,7 +36,7 @@ const properties = [
         { 
                 id: 5, title: "Yorktown House", address: "114 Yorktown Street, Somerville, MA 02144",
                 type: "5 Beds", price: "$6,000", distance: "0.7 miles to Medford/Somerville",
-                imageUrl: "img/house_5.png", datePosted: "4 Days Ago", phone: "(978) 567-8901",
+                imageUrl: "img/house_5.jpg", datePosted: "4 Days Ago", phone: "(978) 567-8901",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1200, pricingType: "Per Unit", 
                 buildingType: "House", beds: "5", baths: "3", isFavorite: false 
@@ -52,7 +52,7 @@ const properties = [
         { 
                 id: 7, title: "Chetwynd Place", address: "34 Chetwynd Road, Somerville, MA 02144",
                 type: "8 Beds", price: "$10,200", distance: "0.2 miles to Medford/Somerville",
-                imageUrl: "img/house_7.png", datePosted: "2 Weeks Ago", phone: "(781) 789-0123",
+                imageUrl: "img/house_7.jpg", datePosted: "2 Weeks Ago", phone: "(781) 789-0123",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1275, pricingType: "Per Unit", 
                 buildingType: "House", beds: "8", baths: "4", isFavorite: false 
@@ -68,7 +68,7 @@ const properties = [
         { 
                 id: 9, title: "Park View Residences", address: "75 Park St, Somerville, MA 02145",
                 type: "2 - 5 Beds", price: "$3,000 - $9,500", distance: "1 mile to Medford/Somerville",
-                imageUrl: "img/house_9.png", datePosted: "Updated Today", phone: "(339) 901-2345",
+                imageUrl: "img/house_9.jpg", datePosted: "Updated Today", phone: "(339) 901-2345",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1500, pricingType: "Per Unit", 
                 buildingType: "Apartment", beds: "5", baths: "3.5", isFavorite: false 
@@ -92,7 +92,7 @@ const properties = [
         { 
                 id: 12, title: "The Pearl Apartments", address: "55 Pearl St, Cambridge, MA 02139",
                 type: "Studio - 2 Beds", price: "$2,750 - $5,250", distance: "2.8 miles to Medford/Somerville",
-                imageUrl: "img/house_12.png", datePosted: "1 Week Ago", phone: "(617) 234-6789",
+                imageUrl: "img/house_12.jpg", datePosted: "1 Week Ago", phone: "(617) 234-6789",
                 
                 campus: "Boston", perBedroomPrice: 1375, pricingType: "Per Bedroom", 
                 buildingType: "Apartment", beds: "2", baths: "1.5", isFavorite: false 
@@ -116,7 +116,7 @@ const properties = [
         { 
                 id: 15, title: "Elm Square Apartments", address: "30 Elm St, Somerville, MA 02144",
                 type: "2 - 4 Beds", price: "$2,900 - $7,200", distance: "1.5 miles to Medford/Somerville",
-                imageUrl: "img/house_15.png", datePosted: "4 Days Ago", phone: "(978) 567-9012",
+                imageUrl: "img/house_15.jpg", datePosted: "4 Days Ago", phone: "(978) 567-9012",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1450, pricingType: "Per Unit", 
                 buildingType: "Apartment", beds: "4", baths: "2.5", isFavorite: false 
@@ -132,7 +132,7 @@ const properties = [
         { 
                 id: 17, title: "Highland Terrace", address: "160 Highland Ave, Somerville, MA 02143",
                 type: "Studio - 2 Beds", price: "$2,400 - $4,500", distance: "0.9 miles to Medford/Somerville",
-                imageUrl: "img/house_17.png", datePosted: "5 Days Ago", phone: "(617) 789-1234",
+                imageUrl: "img/house_17.jpg", datePosted: "5 Days Ago", phone: "(617) 789-1234",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1200, pricingType: "Per Bedroom", 
                 buildingType: "Duplex", beds: "2", baths: "1.5", isFavorite: false 
@@ -148,7 +148,7 @@ const properties = [
         { 
                 id: 19, title: "Columbus Courtyard", address: "85 Columbus Ave, Boston, MA 02116",
                 type: "1 - 4 Beds", price: "$2,900 - $9,200", distance: "5.2 miles to Medford/Somerville",
-                imageUrl: "img/house_19.png", datePosted: "Updated Today", phone: "(339) 901-3456",
+                imageUrl: "img/house_19.jpg", datePosted: "Updated Today", phone: "(339) 901-3456",
                 
                 campus: "Boston", perBedroomPrice: 725, pricingType: "Per Bedroom", 
                 buildingType: "Apartment", beds: "4", baths: "3", isFavorite: false 
@@ -156,7 +156,7 @@ const properties = [
         { 
                 id: 20, title: "Summit Place", address: "67 Summit St, Somerville, MA 02143",
                 type: "2 - 5 Beds", price: "$3,000 - $8,000", distance: "1.1 miles to Medford/Somerville",
-                imageUrl: "img/house_20.png", datePosted: "3 Days Ago", phone: "(978) 012-4567",
+                imageUrl: "img/house_20.jpg", datePosted: "3 Days Ago", phone: "(978) 012-4567",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 1500, pricingType: "Per Bedroom", 
                 buildingType: "House", beds: "5", baths: "3", isFavorite: false 
@@ -188,7 +188,7 @@ const properties = [
         { 
                 id: 24, title: "Union Square Flats", address: "5 Union Sq, Somerville, MA 02143",
                 type: "Studio - 3 Beds", price: "$7,750 - $10,200", distance: "1.2 miles to Medford/Somerville",
-                imageUrl: "img/house_24.png", datePosted: "Updated Today", phone: "(339) 890-1235",
+                imageUrl: "img/house_24.jpg", datePosted: "Updated Today", phone: "(339) 890-1235",
                 
                 campus: "Medford/Somerville", perBedroomPrice: 2600, pricingType: "Per Bedroom", 
                 buildingType: "Triplex", beds: "3", baths: "2", isFavorite: false 
