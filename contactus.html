@@ -46,16 +46,6 @@
         border: 10px solid rgb(63, 171, 218);
     }
 
-    form {
-        background-color: #fff;
-        border-style: none;
-        display: inline-block;
-        border-radius: 10px;
-        padding: 20px;
-        width: 470px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
     label {
         font-size: 18px;
         color: #333;
@@ -74,7 +64,7 @@
         box-sizing: border-box;
     }
 
-    button {
+    .link-button {
         font-size: 20px;
         padding: 10px 20px;
         margin: 0 10px;
@@ -83,41 +73,16 @@
         background-color: rgb(87, 41, 13);
         color: white;
         transition: background-color 0.3s ease;
+        text-decoration: none
     }
 
-    button:hover {
-        background-color: rgb(58, 28, 9);
-    }
-
-    input[type="submit"] {
-        background-color: rgb(87, 41, 13);
-        color: white;
-        border: none;
-        width: 100%;
-        border-radius: 5px;
-        font-size: 18px;
-    }
-
-    input[type="submit"]:hover {
+    .link-button:hover {
         background-color: rgb(58, 28, 9);
     }
 
     p {
         font-size: 22px;
         color: #333;
-    }
-
-    .error-message {
-            color: #ff0000;
-            font-size: 16px;
-            margin-bottom: 10px;
-            display: none;
-        }
-
-    .thank-you-message {
-        display: none;
-        font-size: 22px;
-        color: #000000;
     }
 
     @media(max-width: 500px) {
@@ -132,15 +97,6 @@
             padding: 20px;
         }
 
-        form {
-            width: 100%;
-            padding: 15px;
-        }
-
-        label {
-            font-size: 16px; 
-        }
-
         input, textarea {
             font-size: 16px;
         }
@@ -151,10 +107,6 @@
 
         p {
             font-size: 18px;
-        }
-
-        .error-message,.thank-you-message {
-            font-size: 16px;
         }
     }
 
@@ -171,8 +123,8 @@
         <div class="formBody">
             <div class="button-container">
                 <p>Are you a...</p>
-                <button onclick="showForm('renter')">Renter</button>
-                <button onclick="showForm('landlord')">Landlord</button>
+                <a href="renterspage.html" class="link-button">Renter</a>
+                <a href="landlordpage.html" class="link-button">Landlord</a>
             </div>
         </div>
 
@@ -184,80 +136,3 @@
 
     <footer></footer>
 </html>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function showForm(userType) {
-        $('.button-container').fadeOut(function () {
-            let formHTML = '';
-            if (userType === 'renter') {
-                formHTML = `
-                <form id="renterForm">
-                    <label for="renterName">Name:</label>
-                    <input type="text" id="renterName" name="renterName"><br>
-                    <label for="rphone">Phone Number:</label>
-                    <input type="text" id="rphone" name="rphone"><br>
-                    <label for="renterEmail">Email:</label>
-                    <input type="email" id="renterEmail" name="renterEmail"><br>
-                    <label for="state">Where would you like to rent?:</label>
-                    <input list="houses" id="state" name="houses" placeholder="Choose address of desired home" />
-                    <label for="renterMessage">Message(Optional):</label><br>
-                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
-                    <input type="submit" value="Submit">
-                </form>
-                <datalist id="houses">
-                    <option value="Home1" />
-                    <option value="Home2" />
-                    <option value="Home3" />
-                    <option value="Home4" />
-                    <option value="Home5" />
-                    <option value="Home6" />
-                    <option value="Home7" />
-                    <option value="Home8" />
-                    <option value="Home9" />
-                    <option value="Home10" />
-                </datalist>
-                <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
-                `;
-            } else if (userType === 'landlord') {
-                formHTML = `
-                <form id="renterForm">
-                    <label for="renterName">Name:</label>
-                    <input type="text" id="renterName" name="renterName"><br>
-                    <label for="rphone">Phone Number:</label>
-                    <input type="text" id="rphone" name="rphone"><br>
-                    <label for="renterEmail">Email:</label>
-                    <input type="email" id="renterEmail" name="renterEmail"><br>
-                    <label for="renterMessage">Message(Optional):</label><br>
-                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
-                    <input type="submit" value="Submit">
-                </form>
-                <div class="thank-you-message" id="thank-you-message">Thank you for your submission!</div>
-                `;
-            }
-            
-            $('.formBody').html(formHTML).fadeIn();
-
-            document.querySelector('#renterForm').addEventListener("submit", function(event) {
-                const errorMessage = document.getElementById('error-message');
-                const thankYouMessage = document.getElementById('thank-you-message');
-                const nameInput = document.getElementById('renterName');
-                const phoneInput = document.getElementById('rphone');
-                const emailInput = document.getElementById('renterEmail');
-                
-                if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
-                    event.preventDefault();
-                    errorMessage.style.display = "block";
-                } else {
-                    event.preventDefault();
-                    errorMessage.style.display = "none";
-                    $('#renterForm').fadeOut(function() {
-                        thankYouMessage.style.display = "block";
-                    });
-                }
-            });
-        });
-    }
-</script>
