@@ -144,6 +144,27 @@ body {
     border-radius: 50px;
 }
 
+.action-button {
+    width: 40%;
+    height: 100px;
+    margin: 50px;
+    margin-left: 50%;
+    margin-top: 0px;
+    transform: translateX(-50%);
+    font-size: 36px;
+    background-color: brown;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease; 
+}
+
+.action-button:hover {
+    background-color: lightblue;
+}
+
 .footer {
     width: 100%;
     height: 50px;
