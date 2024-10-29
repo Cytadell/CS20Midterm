@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<style>
+    
+    body {
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    #navbar-placeholder {
+        width: 100%;
+        margin: 0;
+        padding: 0; 
+    }
+
+    header {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 40px;
+        text-align: center;
+        color: #333;
+    }
+
+    .formBody {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 25px;
+        min-width: 500px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border: 10px solid rgb(63, 171, 218);
+    }
+
+    label {
+        font-size: 18px;
+        color: #333;
+        display: block;
+        margin-bottom: 10px;
+        margin-left: 5px;
+    }
+
+    input, textarea {
+        font-size: 18px;
+        padding: 10px;
+        width: 95%;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    .link-button {
+        font-size: 20px;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(87, 41, 13);
+        color: white;
+        transition: background-color 0.3s ease;
+        text-decoration: none
+    }
+
+    .link-button:hover {
+        background-color: rgb(58, 28, 9);
+    }
+
+    p {
+        font-size: 22px;
+        color: #333;
+    }
+
+    @media(max-width: 500px) {
+        h1 {
+            font-size: 28px;
+            margin-top: 50px;
+        }
+
+        .formBody {
+            width: 90%;
+            min-width: 0;
+            padding: 20px;
+        }
+
+        input, textarea {
+            font-size: 16px;
+        }
+
+        button {
+            font-size: 18px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+    }
+
+</style>
+
+<html>
+    <head>
+        <title>Contact Us</title>
+    </head>
+
+    <body>
+        <div id="navbar-placeholder"></div>
+        <h1 style="margin-top: 100px;">Contact Us</h1>
+        <h2 style="max-width: 600px; text-align: center; margin: 0 auto+10px;">
+            Looking to find a place? Want to rent with us? Contact us today and we can 
+            connect you today!
+        </h2>
+        <div class="formBody">
+            <div class="button-container">
+                <p style="text-align: center;">Are you a...</p>
+                <a href="renterspage.html" class="link-button">Renter</a>
+                <a href="landlordpage.html" class="link-button">Landlord</a>
+            </div>
+        </div>
+
+        <script src="js/loadNavbar.js" defer></script>
+
+    </body>
+
+    <figure style="clear: both;"></figure>
+
+    <footer></footer>
+</html>
