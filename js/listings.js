@@ -219,8 +219,8 @@ function renderProperties(properties) {
                                         ${property.distance}
                                 </div>
                                 <div class="property-contact">
-                                <div class="contact-btn">Email Property</div>
-                                <div class="contact-btn">${property.phone}</div>
+                                <a <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
+                                <a href="contactus.html" class="contact-btn">Contact Us</a>
                         </div>
                 </div>
         `;
