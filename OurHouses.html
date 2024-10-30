@@ -152,48 +152,48 @@
                 </div>
         </div>
         <script>
-                const map = document.getElementById('map');
-                const mapContainer = document.getElementById('mapContainer');
-                let scale = 1;
-                let posX = 0;
-                let posY = 0;
-                const zoomFactor = 0.2;
+            const map = document.getElementById('map');
+            const mapContainer = document.getElementById('mapContainer');
+            let scale = 1;
+            let posX = 0;
+            let posY = 0;
+            const zoomFactor = 0.2;
 
-                function zoomIn() {
-                        scale += zoomFactor;
-                        updateTransform();
-                }
+            function zoomIn() {
+                scale += zoomFactor;
+                updateTransform();
+            }
 
-                function zoomOut() {
-                        scale = Math.max(1, scale - zoomFactor);
-                        updateTransform();
-                }
+            function zoomOut() {
+                scale = Math.max(1, scale - zoomFactor);
+                updateTransform();
+            }
 
-                function updateTransform() {
-                        map.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
-                }
+            function updateTransform() {
+                map.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+            }
 
-                let isPanning = false;
-                let startX, startY;
+            let isPanning = false;
+            let startX, startY;
 
-                map.addEventListener('mousedown', (e) => {
-                        isPanning = true;
-                        startX = e.clientX - posX;
-                        startY = e.clientY - posY;
-                        map.style.cursor = 'grabbing';
-                });
+            mapContainer.addEventListener('mousedown', (e) => {
+                isPanning = true;
+                startX = e.clientX - posX;
+                startY = e.clientY - posY;
+                map.style.cursor = 'grabbing';
+            });
 
-                mapContainer.addEventListener('mousemove', (e) => {
-                        if (!isPanning) return;
-                        posX = e.clientX - startX;
-                        posY = e.clientY - startY;
-                        updateTransform();
-                });
+            mapContainer.addEventListener('mousemove', (e) => {
+                if (!isPanning) return;
+                posX = e.clientX - startX;
+                posY = e.clientY - startY;
+                updateTransform();
+            });
 
-                document.addEventListener('mouseup', () => {
+            document.addEventListener('mouseup', () => {
                 isPanning = false;
                 map.style.cursor = 'grab';
-                });
+            });
         </script>
 
 
