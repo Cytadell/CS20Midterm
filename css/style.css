@@ -141,7 +141,7 @@
         .desc-box-4 {
                 margin: 50px;
                 padding: 25px;
-                font-size: 200% !important;
+                font-size: 150%;
                 text-align: center;
                 line-height: 2;
                 background-color: white;
@@ -283,23 +283,33 @@
         }
 
         @media(max-width: 560px) {
-        .desc-box-1 {
-                font-size: 115%;
+            .desc-box-1 {
+                    font-size: 115%;
+            }
+
+            .desc-box-2 {
+                    font-size: 75%;
+            }
+
+            .desc-box-3txt {
+                    font-size: 75%;
+            }
         }
 
-        .desc-box-2 {
-                font-size: 75%;
-        }
-
-        .desc-box-3txt {
-                font-size: 75%;
-        }
+        @media(max-width: 525px) {
+            .desc-box-4 h2 {
+                font-size: 150%;
+            }
         }
 
         @media(max-width: 490px) {
-        .desc-box-1 {
-                font-size: 100%;
-        }
+            .desc-box-1 {
+                    font-size: 100%;
+            }
+
+            .action-button {
+                font-size: 30px;
+            }
         }
 
         @media(max-width: 455px) {
@@ -313,7 +323,11 @@
         }
 
         @media(max-width: 425px) {
-        .picture-textbox {
-                font-size: 14px;
-        }
+            .picture-textbox {
+                    font-size: 14px;
+            }
+
+            .action-button {
+                font-size: 24px;
+            }
         }
