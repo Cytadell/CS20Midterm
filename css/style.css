@@ -1,7 +1,12 @@
+        * {
+            overflow-x: hidden;
+        }
+        
         body {
-                font-family: Arial, sans-serif;
-                margin: 0;
-                padding: 0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+                  
         }
 
         .home-body{
@@ -196,7 +201,7 @@
                 transform: scale(1.05);
         }   
         .footer p {
-                margin: 10px 0;
+                /* margin: 10px 0; */
         }
 
         @media(max-width: 1550px) {
