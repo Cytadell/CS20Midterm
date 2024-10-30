@@ -194,7 +194,24 @@
                 isPanning = false;
                 map.style.cursor = 'grab';
             });
-        </script>
+    
+                mapContainer.addEventListener('touchstart', (e) => {
+                isPanning = true;
+                startX = e.touches[0].clientX - posX;
+                startY = e.touches[0].clientY - posY;
+            });
+
+            mapContainer.addEventListener('touchmove', (e) => {
+                if (!isPanning) return;
+                posX = e.touches[0].clientX - startX;
+                posY = e.touches[0].clientY - startY;
+                updateTransform();
+            });
+
+            mapContainer.addEventListener('touchend', () => {
+                isPanning = false;
+            });
+       </script>
 
 
 </body>
