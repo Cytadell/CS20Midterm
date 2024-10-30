@@ -1,195 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <html>
-    <link rel="stylesheet" href="css/style.css">
-</html>
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map with Dots</title>
-    <link rel="stylesheet" href="css/listings.css">
-    <style>
-        body {
-            margin: 0;
-            box-sizing: border-box;
-        }
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Interactive Map with Dots</title>
+        <style>
+                body {
+                        margin: 0;
+                        box-sizing: border-box;
+                }
 
-        .map-frame {
-            position: relative;
-            width: 90%;
-            max-width: 1000px;
-            margin: 0 auto;
-            border: 5px solid #333;
-            border-radius: 10px;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-        }
+                .main-body {
+                        padding-bottom: 20px;
+                }
 
-        .map-container {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            border-radius: 10px;
-            padding-top: 66.66%;
-        }
+                h1 {
+                        font-size: 40px;
+                        text-align: center;
+                        color: #333;
+                        margin-top: 30px;
+                        margin-bottom: 30px;
+                }
 
-        .map {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('img/OurProperties.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            transform-origin: top left;
-        }
+                .map-frame {
+                        position: relative;
+                        width: 90%;
+                        max-width: 1000px;
+                        margin: 0 auto;
+                        border: 5px solid #333;
+                        border-radius: 10px;
+                        padding: 20px;
+                        background-color: white;
+                        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+                }
 
-        .dot {
-            position: absolute;
-            width: 2vw;
-            height: 2vw;
-            background-color: red;
-            border-radius: 50%;
-            cursor: pointer;
-            transform-origin: center;
-        }
+                .map-container {
+                        width: 100%;
+                        overflow: hidden;
+                        position: relative;
+                        border-radius: 10px;
+                        padding-top: 66.66%;
+                }
 
-        .dot:hover {
-            background-color: darkred;
-            transform: scale(1.2);
-            transition: transform 0.2s;
-        }
+                .map {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-image: url('img/OurProperties.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        transform-origin: top left;
+                }
 
-        .zoom-controls {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            z-index: 1001;
-        }
+                .dot {
+                        position: absolute;
+                        width: 2vw;
+                        height: 2vw;
+                        background-color: red;
+                        border-radius: 50%;
+                        cursor: pointer;
+                        transform-origin: center;
+                }
 
-        .zoom-button {
-            padding: 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            margin: 10px 0;
-            border-radius: 10px;
-            font-size: 24px;
-        }
-        @media (max-width: 768px) {
-            .map-frame {
-                width: 100%;
-                padding: 10px;
-            }
+                .dot:hover {
+                        background-color: darkred;
+                        transform: scale(1.2);
+                        transition: transform 0.2s;
+                }
 
-            .zoom-button {
-                font-size: 14px;
-                padding: 8px;
-            }
-        }
+                .zoom-controls {
+                        position: absolute;
+                        bottom: 20px;
+                        right: 20px;
+                        display: flex;
+                        flex-direction: column;
+                        z-index: 1001;
+                }
 
-        @media (max-width: 480px) {
-            .dot {
-                width: 4vw;
-                height: 4vw;
-            }
-            .zoom-button {
-                font-size: 12px;
-                padding: 6px;
-            }
-        }
-    </style>
-    
-    <script src="js/loadNavbar.js" defer></script>
+                .zoom-button {
+                        padding: 20px;
+                        background-color: #333;
+                        color: white;
+                        border: none;
+                        cursor: pointer;
+                        margin: 10px 0;
+                        border-radius: 10px;
+                        font-size: 24px;
+                }
+
+                @media (max-width: 768px) {
+                .map-frame {
+                        flex: 1;
+                        width: 100%;
+                        padding: 10px;
+                }
+
+                .zoom-button {
+                        font-size: 14px;
+                        padding: 8px;
+                }
+                }
+
+                @media (max-width: 480px) {
+                .dot {
+                        width: 4vw;
+                        height: 4vw;
+                }
+                .zoom-button {
+                        font-size: 12px;
+                        padding: 6px;
+                }
+                }
+        </style>
+        <script src="js/loadNavbar.js" defer></script>
 </head>
-<body>
-
-    <div id="navbar-placeholder"></div>
-
-    <div class="map-frame">
-        <div class="map-container" id="mapContainer">
-            <div class="map" id="map">
-                <div class="dot" style="top: 27%; left: 45.5%;" onclick="window.location.href='product.html?id=1'"></div>
-                <div class="dot" style="top: 25%; left: 42%;" onclick="window.location.href='product.html?id=5'"></div>
-                <div class="dot" style="top: 34%; left: 54.8%;" onclick="window.location.href='product.html?id=7'"></div>
-                <div class="dot" style="top: 37%; left: 23.7%;" onclick="window.location.href='product.html?id=9'"></div>
-                <div class="dot" style="top: 46.5%; left: 24%;" onclick="window.location.href='product.html?id=10'"></div>
-                <div class="dot" style="top: 52.25%; left: 24.4%;" onclick="window.location.href='product.html?id=13'"></div>
-                <div class="dot" style="top: 58%; left: 24.55%;" onclick="window.location.href='product.html?id=15'"></div>
-                <div class="dot" style="top: 52.8%; left: 71.8%;" onclick="window.location.href='product.html?id=16'"></div>
-                <div class="dot" style="top: 68%; left: 70%;" onclick="window.location.href='product.html?id=17'"></div> 
-                <div class="dot" style="top: 59.3%; left: 35.6%;" onclick="window.location.href='product.html?id=20'"></div>
-                <div class="dot" style="top: 59.7%; left: 32.1%;" onclick="window.location.href='product.html?id=22'"></div> 
-                <div class="dot" style="top: 59.9%; left: 29%;" onclick="window.location.href='product.html?id=24'"></div> 
-                <div class="dot" style="top: 65%; left: 25%;" onclick="window.location.href='product.html?id=23'"></div> 
-                <div class="dot" style="top: 85%; left: 38.6%;" onclick="window.location.href='product.html?id=22'"></div>
-                <div class="dot" style="top: 80%; left: 38.5%;" onclick="window.location.href='product.html?id=21'"></div>
-                <div class="dot" style="top: 53%; left: 29%;" onclick="window.location.href='product.html?id=19'"></div> 
-                <div class="dot" style="top: 30.8%; left: 31.4%;" onclick="window.location.href='product.html?id=18'"></div> 
-                <div class="dot" style="top: 26%; left: 31.8%;" onclick="window.location.href='product.html?id=19'"></div>
-                <div class="dot" style="top: 30%; left: 23.3%;" onclick="window.location.href='product.html?id=11'"></div>
-                <div class="dot" style="top: 30.55%; left: 27.5%;" onclick="window.location.href='product.html?id=8'"></div> 
-            </div>
+<body class="main-body">
+        <div id="navbar-placeholder"></div>
+        <h1>Map</h1>
+        <div class="map-frame">
+                <div class="map-container" id="mapContainer">
+                        <div class="map" id="map">
+                                <div class="dot" style="top: 27%; left: 45.5%;" onclick="window.location.href='product.html?id=1'"></div>
+                                <div class="dot" style="top: 25%; left: 42%;" onclick="window.location.href='product.html?id=5'"></div>
+                                <div class="dot" style="top: 34%; left: 54.8%;" onclick="window.location.href='product.html?id=7'"></div>
+                                <div class="dot" style="top: 37%; left: 23.7%;" onclick="window.location.href='product.html?id=9'"></div>
+                                <div class="dot" style="top: 46.5%; left: 24%;" onclick="window.location.href='product.html?id=10'"></div>
+                                <div class="dot" style="top: 52.25%; left: 24.4%;" onclick="window.location.href='product.html?id=13'"></div>
+                                <div class="dot" style="top: 58%; left: 24.55%;" onclick="window.location.href='product.html?id=15'"></div>
+                                <div class="dot" style="top: 52.8%; left: 71.8%;" onclick="window.location.href='product.html?id=16'"></div>
+                                <div class="dot" style="top: 68%; left: 70%;" onclick="window.location.href='product.html?id=17'"></div> 
+                                <div class="dot" style="top: 59.3%; left: 35.6%;" onclick="window.location.href='product.html?id=20'"></div>
+                                <div class="dot" style="top: 59.7%; left: 32.1%;" onclick="window.location.href='product.html?id=22'"></div> 
+                                <div class="dot" style="top: 59.9%; left: 29%;" onclick="window.location.href='product.html?id=24'"></div> 
+                                <div class="dot" style="top: 65%; left: 25%;" onclick="window.location.href='product.html?id=23'"></div> 
+                                <div class="dot" style="top: 85%; left: 38.6%;" onclick="window.location.href='product.html?id=22'"></div>
+                                <div class="dot" style="top: 80%; left: 38.5%;" onclick="window.location.href='product.html?id=21'"></div>
+                                <div class="dot" style="top: 53%; left: 29%;" onclick="window.location.href='product.html?id=19'"></div> 
+                                <div class="dot" style="top: 30.8%; left: 31.4%;" onclick="window.location.href='product.html?id=18'"></div> 
+                                <div class="dot" style="top: 26%; left: 31.8%;" onclick="window.location.href='product.html?id=19'"></div>
+                                <div class="dot" style="top: 30%; left: 23.3%;" onclick="window.location.href='product.html?id=11'"></div>
+                                <div class="dot" style="top: 30.55%; left: 27.5%;" onclick="window.location.href='product.html?id=8'"></div> 
+                        </div>
+                </div>
+                <div class="zoom-controls">
+                        <button class="zoom-button" onclick="zoomIn()">+</button>
+                        <button class="zoom-button" onclick="zoomOut()">-</button>
+                </div>
         </div>
-        <div class="zoom-controls">
-            <button class="zoom-button" onclick="zoomIn()">+</button>
-            <button class="zoom-button" onclick="zoomOut()">-</button>
-        </div>
-    </div>
+        <script>
+                const map = document.getElementById('map');
+                const mapContainer = document.getElementById('mapContainer');
+                let scale = 1;
+                let posX = 0;
+                let posY = 0;
+                const zoomFactor = 0.2;
 
+                function zoomIn() {
+                        scale += zoomFactor;
+                        updateTransform();
+                }
 
-    <script>
-        const map = document.getElementById('map');
-        const mapContainer = document.getElementById('mapContainer');
-        let scale = 1;
-        let posX = 0;
-        let posY = 0;
-        const zoomFactor = 0.2;
+                function zoomOut() {
+                        scale = Math.max(1, scale - zoomFactor);
+                        updateTransform();
+                }
 
-        function zoomIn() {
-            scale += zoomFactor;
-            updateTransform();
-        }
+                function updateTransform() {
+                        map.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
+                }
 
-        function zoomOut() {
-            scale = Math.max(1, scale - zoomFactor);
-            updateTransform();
-        }
+                let isPanning = false;
+                let startX, startY;
 
-        function updateTransform() {
-            map.style.transform = `scale(${scale}) translate(${posX}px, ${posY}px)`;
-        }
+                map.addEventListener('mousedown', (e) => {
+                        isPanning = true;
+                        startX = e.clientX - posX;
+                        startY = e.clientY - posY;
+                        map.style.cursor = 'grabbing';
+                });
 
-        let isPanning = false;
-        let startX, startY;
+                mapContainer.addEventListener('mousemove', (e) => {
+                        if (!isPanning) return;
+                        posX = e.clientX - startX;
+                        posY = e.clientY - startY;
+                        updateTransform();
+                });
 
-        map.addEventListener('mousedown', (e) => {
-            isPanning = true;
-            startX = e.clientX - posX;
-            startY = e.clientY - posY;
-            map.style.cursor = 'grabbing';
-        });
+                document.addEventListener('mouseup', () => {
+                isPanning = false;
+                map.style.cursor = 'grab';
+                });
+        </script>
 
-        mapContainer.addEventListener('mousemove', (e) => {
-            if (!isPanning) return;
-            posX = e.clientX - startX;
-            posY = e.clientY - startY;
-            updateTransform();
-        });
-
-        document.addEventListener('mouseup', () => {
-            isPanning = false;
-            map.style.cursor = 'grab';
-        });
-    </script>
 
 </body>
 </html>
