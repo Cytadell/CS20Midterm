@@ -1,274 +1,258 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <html>
-    <link rel="stylesheet" href="css/style.css">
-</html>
-
-<style>
-    
-    body {
-        background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-
-    #navbar-placeholder {
-        width: 100%;
-        margin: 0;
-        padding: 0; 
-    }
-
-    .formBody {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 25px;
-        min-width: 500px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        border: 10px solid rgb(63, 171, 218);
-    }
-
-    form {
-        background-color: #fff;
-        border-style: none;
-        display: inline-block;
-        border-radius: 10px;
-        padding: 20px;
-        width: 470px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    label {
-        font-size: 18px;
-        color: #333;
-        display: block;
-        margin-bottom: 10px;
-        margin-left: 5px;
-    }
-
-    input, textarea {
-        font-size: 18px;
-        padding: 10px;
-        width: 95%;
-        margin-bottom: 20px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        box-sizing: border-box;
-    }
-
-    button {
-        font-size: 20px;
-        padding: 10px 20px;
-        margin: 0 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: rgb(87, 41, 13);
-        color: white;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: rgb(58, 28, 9);
-    }
-
-    input[type="submit"] {
-        background-color: rgb(87, 41, 13);
-        color: white;
-        border: none;
-        width: 100%;
-        border-radius: 5px;
-        font-size: 18px;
-    }
-
-    input[type="submit"]:hover {
-        background-color: rgb(58, 28, 9);
-    }
-
-    p {
-        font-size: 22px;
-        color: #333;
-    }
-
-    .error-message {
-            color: #ff0000;
-            font-size: 16px;
-            margin-bottom: 10px;
-            display: none;
-        }
-
-    .thank-you-message {
-        display: none;
-        font-size: 22px;
-        color: #000000;
-    }
-
-    @media(max-width: 500px) {
-        h1 {
-            font-size: 28px;
-            margin-top: 50px;
-        }
-
-        .formBody {
-            width: 90%;
-            min-width: 0;
-            padding: 20px;
-        }
-
-        form {
-            width: 100%;
-            padding: 15px;
-        }
-
-        label {
-            font-size: 16px; 
-        }
-
-        input, textarea {
-            font-size: 16px;
-        }
-
-        button {
-            font-size: 18px;
-        }
-
-        p {
-            font-size: 18px;
-        }
-
-        .error-message,.thank-you-message {
-            font-size: 16px;
-        }
-    }
-
-</style>
-
-<html>
-    <head>
-        <title>Contact Us</title>
+<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        <title>Contact Us</title>
+        <script src="js/loadNavbar.js" defer></script>
+        <style> 
+                body {
+                        background-color: #f0f0f0;
+                        margin: 0;
+                        padding: 0;
+                }
+                .form-body {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                }
 
-    <body>
+                .formBody {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #fff;
+                        padding: 40px;
+                        border-radius: 25px;
+                        min-width: 500px;
+                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                        border: 10px solid rgb(63, 171, 218);
+                }
+
+                form {
+                        background-color: #fff;
+                        border-style: none;
+                        display: inline-block;
+                        border-radius: 10px;
+                        padding: 20px;
+                        width: 470px;
+                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                }
+
+                label {
+                        font-size: 18px;
+                        color: #333;
+                        display: block;
+                        margin-bottom: 10px;
+                        margin-left: 5px;
+                }
+
+                input, textarea {
+                        font-size: 18px;
+                        padding: 10px;
+                        width: 95%;
+                        margin-bottom: 20px;
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        box-sizing: border-box;
+                }
+
+                button {
+                        font-size: 20px;
+                        padding: 10px 20px;
+                        margin: 0 10px;
+                        border: none;
+                        border-radius: 5px;
+                        background-color: rgb(87, 41, 13);
+                        color: white;
+                        transition: background-color 0.3s ease;
+                }
+
+                button:hover {
+                        background-color: rgb(58, 28, 9);
+                }
+
+                input[type="submit"] {
+                        background-color: rgb(87, 41, 13);
+                        color: white;
+                        border: none;
+                        width: 100%;
+                        border-radius: 5px;
+                        font-size: 18px;
+                }
+
+                input[type="submit"]:hover {
+                        background-color: rgb(58, 28, 9);
+                }
+
+                p {
+                        font-size: 22px;
+                        color: #333;
+                }
+
+                .error-message {
+                        color: #ff0000;
+                        font-size: 16px;
+                        margin-bottom: 10px;
+                        display: none;
+                        }
+
+                .thank-you-message {
+                        display: none;
+                        font-size: 22px;
+                        color: #000000;
+                }
+
+                @media(max-width: 500px) {
+                        h1 {
+                                font-size: 28px;
+                                margin-top: 50px;
+                        }
+
+                        .formBody {
+                                flex: 1;
+                                min-width: 0;
+                                padding: 20px;
+                        }
+
+                        form {
+                                width: 100%;
+                                padding: 15px;
+                        }
+
+                        label {
+                                font-size: 16px; 
+                        }
+
+                        input, textarea {
+                                font-size: 16px;
+                        }
+
+                        button {
+                                font-size: 18px;
+                        }
+
+                        p {
+                                font-size: 18px;
+                        }
+
+                        .error-message,.thank-you-message {
+                                font-size: 16px;
+                        }
+                }
+        </style>
+</head>
+<body>
         <div id="navbar-placeholder"></div>
-        <h1 style="margin-top: 100px;">Contact Us</h1>
-        <h2 style="max-width: 600px; text-align: center; margin: 0 auto+10px;">
-            Looking to find a place? Want to rent with us? Contact us today and we can 
-            connect you today!
-        </h2>
-        <div class="formBody">
-            <div class="button-container">
-                <p style="text-align: center;">Are you a...</p>
-                <button onclick="showForm('renter')">Renter</button>
-                <button onclick="showForm('landlord')">Landlord</button>
-            </div>
+        <div class="form-body">
+                <h1 style="margin-top: 100px;">Contact Us</h1>
+                <h2 style="max-width: 600px; text-align: center; margin: 0 auto+10px;">
+                Looking to find a place? Want to rent with us? Contact us today and we can 
+                connect you today!
+                </h2>
+                <div class="formBody">
+                        <div class="button-container">
+                                <p style="text-align: center;">Are you a...</p>
+                                <button onclick="showForm('renter')">Renter</button>
+                                <button onclick="showForm('landlord')">Landlord</button>
+                        </div>
+                </div>
         </div>
 
         <script src="js/loadNavbar.js" defer></script>
-
-    </body>
-
-    <figure style="clear: both;"></figure>
-
-    <footer></footer>
+</body>
+<figure style="clear: both;"></figure>
+<footer></footer>
 </html>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    function showForm(userType) {
+function showForm(userType) {
         $('.button-container').fadeOut(function () {
-            let formHTML = '';
-            if (userType === 'renter') {
-                formHTML = `
-                <form id="renterForm">
-                    <label for="renterName">Name:</label>
-                    <input type="text" id="renterName" name="renterName"><br>
-                    <label for="rphone">Phone Number:</label>
-                    <input type="text" id="rphone" name="rphone"><br>
-                    <label for="renterEmail">Email:</label>
-                    <input type="email" id="renterEmail" name="renterEmail"><br>
-                    <label for="houses">Where would you like to rent?:</label>
-                    <input list="houses" id="houses" name="houses" placeholder="Choose address of desired home" />
-                    <label for="renterMessage">Message(Optional):</label><br>
-                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
-                    <input type="submit" value="Submit">
-                </form>
-                <datalist id="houses">
-                    <option value="15 Saint James Avenue" />
-                    <option value="240 Sidney St" />
-                    <option value="100-150 Exchange St" />
-                    <option value="101 Mill Rd" />
-                    <option value="114 Yorktown Street" />
-                    <option value="235 Old Colony Ave" />
-                    <option value="34 Chetwynd Road" />
-                    <option value="50 Clarendon St" />
-                    <option value="75 Park St" />
-                    <option value="200 Mystic Ave" />
-                    <option value="40 Charles St" />
-                    <option value="55 Pearl St" />
-                    <option value="112 Mill St" />
-                    <option value="210 River St" />
-                    <option value="30 Elm St" />
-                    <option value="75 Riverside Ave" />
-                    <option value="160 Highland Ave" />
-                    <option value="270 Broadway" />
-                    <option value="85 Columbus Ave" />
-                    <option value="67 Summit St" />
-                    <option value="22 Victory Rd" />
-                    <option value="78 Central St" />
-                    <option value="12 Canal St" />
-                    <option value="5 Union Sq" />
-                </datalist>
-                <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
-                `;
-            } else if (userType === 'landlord') {
-                formHTML = `
-                <form id="renterForm">
-                    <label for="renterName">Name:</label>
-                    <input type="text" id="renterName" name="renterName"><br>
-                    <label for="rphone">Phone Number:</label>
-                    <input type="text" id="rphone" name="rphone"><br>
-                    <label for="renterEmail">Email:</label>
-                    <input type="email" id="renterEmail" name="renterEmail"><br>
-                    <label for="renterMessage">Message(Optional):</label><br>
-                    <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                    <div class="error-message" id="error-message">Please fill in all fields.</div>
-                    <input type="submit" value="Submit">
-                </form>
-                <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
-                `;
-            }
-            
-            $('.formBody').html(formHTML).fadeIn();
-
-            document.querySelector('#renterForm').addEventListener("submit", function(event) {
-                const errorMessage = document.getElementById('error-message');
-                const thankYouMessage = document.getElementById('thank-you-message');
-                const nameInput = document.getElementById('renterName');
-                const phoneInput = document.getElementById('rphone');
-                const emailInput = document.getElementById('renterEmail');
-                
-                if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
-                    event.preventDefault();
-                    errorMessage.style.display = "block";
-                } else {
-                    event.preventDefault();
-                    errorMessage.style.display = "none";
-                    $('#renterForm').fadeOut(function() {
-                        thankYouMessage.style.display = "block";
-                    });
+                let formHTML = '';
+                if (userType === 'renter') {
+                        formHTML = `
+                        <form id="renterForm">
+                                <label for="renterName">Name:</label>
+                                <input type="text" id="renterName" name="renterName"><br>
+                                <label for="rphone">Phone Number:</label>
+                                <input type="text" id="rphone" name="rphone"><br>
+                                <label for="renterEmail">Email:</label>
+                                <input type="email" id="renterEmail" name="renterEmail"><br>
+                                <label for="houses">Where would you like to rent?:</label>
+                                <input list="houses" id="houses" name="houses" placeholder="Choose address of desired home" />
+                                <label for="renterMessage">Message(Optional):</label><br>
+                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                                <div class="error-message" id="error-message">Please fill in all fields.</div>
+                                <input type="submit" value="Submit">
+                        </form>
+                        <datalist id="houses">
+                                <option value="15 Saint James Avenue" />
+                                <option value="240 Sidney St" />
+                                <option value="100-150 Exchange St" />
+                                <option value="101 Mill Rd" />
+                                <option value="114 Yorktown Street" />
+                                <option value="235 Old Colony Ave" />
+                                <option value="34 Chetwynd Road" />
+                                <option value="50 Clarendon St" />
+                                <option value="75 Park St" />
+                                <option value="200 Mystic Ave" />
+                                <option value="40 Charles St" />
+                                <option value="55 Pearl St" />
+                                <option value="112 Mill St" />
+                                <option value="210 River St" />
+                                <option value="30 Elm St" />
+                                <option value="75 Riverside Ave" />
+                                <option value="160 Highland Ave" />
+                                <option value="270 Broadway" />
+                                <option value="85 Columbus Ave" />
+                                <option value="67 Summit St" />
+                                <option value="22 Victory Rd" />
+                                <option value="78 Central St" />
+                                <option value="12 Canal St" />
+                                <option value="5 Union Sq" />
+                        </datalist>
+                        <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
+                        `;
+                } else if (userType === 'landlord') {
+                        formHTML = `
+                        <form id="renterForm">
+                                <label for="renterName">Name:</label>
+                                <input type="text" id="renterName" name="renterName"><br>
+                                <label for="rphone">Phone Number:</label>
+                                <input type="text" id="rphone" name="rphone"><br>
+                                <label for="renterEmail">Email:</label>
+                                <input type="email" id="renterEmail" name="renterEmail"><br>
+                                <label for="renterMessage">Message(Optional):</label><br>
+                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                                <div class="error-message" id="error-message">Please fill in all fields.</div>
+                                <input type="submit" value="Submit">
+                        </form>
+                        <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
+                        `;
                 }
-            });
+                
+                $('.formBody').html(formHTML).fadeIn();
+
+                document.querySelector('#renterForm').addEventListener("submit", function(event) {
+                        const errorMessage = document.getElementById('error-message');
+                        const thankYouMessage = document.getElementById('thank-you-message');
+                        const nameInput = document.getElementById('renterName');
+                        const phoneInput = document.getElementById('rphone');
+                        const emailInput = document.getElementById('renterEmail');
+                        
+                        if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
+                                event.preventDefault();
+                                errorMessage.style.display = "block";
+                        } else {
+                                event.preventDefault();
+                                errorMessage.style.display = "none";
+                                $('#renterForm').fadeOut(function() {
+                                        thankYouMessage.style.display = "block";
+                                });
+                        }
+                });
         });
-    }
+}
 </script>

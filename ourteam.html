@@ -1,191 +1,173 @@
 <!DOCTYPE html>
-
-<html>
-    <link rel="stylesheet" href="css/style.css">
-</html>
-
-<style>
-    body {
-        background-color: #f0f0f0;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    
-    *, *::before, *::after {
-        box-sizing: border-box;
-    }
-
-    #navbar-placeholder {
-        width: 100%;
-        margin: 0;
-        padding: 0; 
-    }
-
-    header {
-        width: 100%;
-        padding: 0;
-        margin: 0;
-    }
-
-    h1 {
-        font-size: 40px;
-        text-align: center;
-        color: #333;
-        margin-top: 30px;
-        margin-bottom: 40px;
-    }
-
-    ul {
-        padding: 0;
-    }
-
-    li {
-        list-style-type: none;
-        margin-bottom: 50px;
-    }
-
-    .profile {
-        background-color: white;
-        border-radius: 15px;
-        display: flex;
-        align-items: center;
-        padding: 20px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 1300px;
-        width: 90%;
-        margin: 0 auto;
-        border: 10px solid rgb(63, 171, 218);
-    }
-
-    .profile img {
-        height: 250px;
-        border-radius: 15px;
-        margin-right: 30px;
-        object-fit: cover;
-    }
-
-    .profile h3 {
-        font-size: 24px;
-        color: #333;
-        margin-bottom: 15px;
-    }
-
-    .profile p {
-        font-size: 18px;
-        color: #555;
-        line-height: 1.6;
-    }
-
-    figure {
-        clear: both;
-    }
-
-    @media (max-width: 500px) {
-        h1 {
-            font-size: 28px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-
-        ul {
-            width: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-        .profile {
-            flex-direction: column;
-            max-width: 90%;
-            width: 100%;
-            margin: 10px auto;
-        }
-
-        .profile img {
-            border-radius: 15px;
-            margin-bottom: 10px;
-            width: 100%;
-        }
-
-        .profile h3 {
-            font-size: 20px;
-            margin: 5px 0;
-        }
-
-        .profile p {
-            font-size: 16px;
-            line-height: 1.4;
-        }
-    }
-
-</style>
-
 <html lang="en">
+<html>
 <head>
-    <title>Our Team</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Our Team</title>
+        <script src="js/loadNavbar.js" defer></script>
+        <style> 
+                body {
+                        background-color: #f0f0f0;
+                        font-family: Arial, sans-serif;
+                        margin: 0;
+                        padding: 0;
+                }
+                
+                .name-body {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                }
+
+                h1 {
+                        font-size: 40px;
+                        text-align: center;
+                        color: #333;
+                        margin-top: 30px;
+                        margin-bottom: 40px;
+                }
+
+                ul {
+                        padding: 0;
+                }
+
+                li {
+                        list-style-type: none;
+                        margin-bottom: 50px;
+                }
+
+                .profile {
+                        background-color: white;
+                        border-radius: 15px;
+                        display: flex;
+                        align-items: center;
+                        padding: 20px;
+                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+                        max-width: 1300px;
+                        width: 90%;
+                        margin: 0 auto;
+                        border: 10px solid rgb(63, 171, 218);
+                }
+
+                .profile img {
+                        height: 250px;
+                        border-radius: 15px;
+                        margin-right: 30px;
+                        object-fit: cover;
+                }
+
+                .profile h3 {
+                        font-size: 24px;
+                        color: #333;
+                        margin-bottom: 15px;
+                }
+
+                .profile p {
+                        font-size: 18px;
+                        color: #555;
+                        line-height: 1.6;
+                }
+
+                figure {
+                        clear: both;
+                }
+
+                @media (max-width: 500px) {
+                        h1 {
+                                font-size: 28px;
+                                margin-top: 20px;
+                                margin-bottom: 20px;
+                        }
+
+                        ul {
+                                width: 100%;
+                                padding: 0;
+                                margin: 0;
+                        }
+
+                        .profile {
+                                flex-direction: column;
+                                max-width: 90%;
+                                width: 100%;
+                                margin: 10px auto;
+                        }
+
+                        .profile img {
+                                border-radius: 15px;
+                                margin-bottom: 10px;
+                                width: 100%;
+                        }
+
+                        .profile h3 {
+                                font-size: 20px;
+                                margin: 5px 0;
+                        }
+
+                        .profile p {
+                                font-size: 16px;
+                                line-height: 1.4;
+                        }
+                }
+
+        </style>
 </head>
-
 <body>
-    <div id="navbar-placeholder"></div>
-    <h1>Our Team</h1>
-    <ul>
-        <li class="profile">
-            <img src="img/gavinprofile.jpg" alt="Profile picture of Person 1">
-            <div>
-                <h3>Gavin McCarthy-Bui</h3>
-                <p>
-                    (Note this Profile is Parody) Gavin McCarthy-Bui is Tufts Computer Science Student who 
-                    realized that Tufts students needed more options for housing and banded togther with
-                    other Tufts students to create JumboSpace. He has been working as a programmer
-                    for nearly three years and is largely responsible for correspondece and outreach at JumboSpace.
-                </p>
-            </div>
-        </li>
-        <br>
-        <li class="profile">
-            <img src="img/ReesTindall.jpg" alt="Profile picture of Person 2">
-            <div>
-                <h3>Rees Tindall</h3>
-                <p>
-                    (Note this Profile is Parody) Rees Tindall is a senior at Tufts University studying 
-                    cybersecurity. He saw the importance of secure housing platforms for students and joined 
-                    JumboSpace to help protect user data and privacy. With a background in cybersecurity, 
-                    Rees contributes by focusing on risk management and ensuring the safety of the platforms 
-                    information. 
-                </p>
-            </div>
-        </li>
-        <br>
-        <li class="profile">
-            <img src="img/andrej.jpg" alt="Profile picture of Person 3">
-            <div>
-                <h3>Andrej Djokic</h3>
-                <p>
-                        (Note this Profile is Parody) Andrej Djokic is a junior at Tufts University majoring in Computer Science. 
-                        As the lead backend developer at JumboSpace, Andrej plays a crucial role in building and maintaining the 
-                        technical foundation of the platform. With a passion for creating efficient systems, he ensures that 
-                        everything runs seamlessly behind the scenes to support users' needs.
-                </p>
-            </div>
-        </li>
-        <br>
-        <li class="profile">
-            <img src="img/hchang.jpg" alt="Profile picture of Person 4">
-            <div>
-                <h3>Harrison Chang</h3>
-                <p>
-                    (Note this Profile is Parody) Harrison Chang is a senior at Tufts University studying economics and computer science. He shows up in our offices sometimes and steals things from the fridge.
-                </p>
-            </div>
-        </li>
-    </ul>
-    <script src="js/loadNavbar.js" defer></script>
+        <div id="navbar-placeholder"></div>
+        <div class="name-body">
+                <h1>Our Team</h1>
+                <ul>
+                        <li class="profile">
+                        <img src="img/gavinprofile.jpg" alt="Profile picture of Person 1">
+                        <div>
+                                <h3>Gavin McCarthy-Bui</h3>
+                                <p>
+                                (Note this Profile is Parody) Gavin McCarthy-Bui is Tufts Computer Science Student who 
+                                realized that Tufts students needed more options for housing and banded togther with
+                                other Tufts students to create JumboSpace. He has been working as a programmer
+                                for nearly three years and is largely responsible for correspondece and outreach at JumboSpace.
+                                </p>
+                        </div>
+                        </li>
+                        <br>
+                        <li class="profile">
+                        <img src="img/ReesTindall.jpg" alt="Profile picture of Person 2">
+                        <div>
+                                <h3>Rees Tindall</h3>
+                                <p>
+                                (Note this Profile is Parody) Rees Tindall is a senior at Tufts University studying 
+                                cybersecurity. He saw the importance of secure housing platforms for students and joined 
+                                JumboSpace to help protect user data and privacy. With a background in cybersecurity, 
+                                Rees contributes by focusing on risk management and ensuring the safety of the platforms 
+                                information. 
+                                </p>
+                        </div>
+                        </li>
+                        <br>
+                        <li class="profile">
+                        <img src="img/andrej.jpg" alt="Profile picture of Person 3">
+                        <div>
+                                <h3>Andrej Djokic</h3>
+                                <p>
+                                        (Note this Profile is Parody) Andrej Djokic is a junior at Tufts University majoring in Computer Science. 
+                                        As the lead backend developer at JumboSpace, Andrej plays a crucial role in building and maintaining the 
+                                        technical foundation of the platform. With a passion for creating efficient systems, he ensures that 
+                                        everything runs seamlessly behind the scenes to support users' needs.
+                                </p>
+                        </div>
+                        </li>
+                        <br>
+                        <li class="profile">
+                        <img src="img/hchang.jpg" alt="Profile picture of Person 4">
+                        <div>
+                                <h3>Harrison Chang</h3>
+                                <p>
+                                (Note this Profile is Parody) Harrison Chang is a senior at Tufts University studying economics and computer science. He shows up in our offices sometimes and steals things from the fridge.
+                                </p>
+                        </div>
+                        </li>
+                </ul>
+        </div>
+        <script src="js/loadNavbar.js" defer></script>
 </body>
-
 </html>
