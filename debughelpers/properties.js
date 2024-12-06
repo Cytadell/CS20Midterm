@@ -10,9 +10,9 @@ async function loadProperties() {
             return properties; // Return the data fetched from the backend
         } catch (error) {
             console.error("Error fetching properties:", error);
-            return defaultProperties; // Fallback to default properties in case of an error
         }
-    }
+        return properties;
+}
     
     // Save the current properties list to localStorage
     function savePropertiesToLocalStorage() {
@@ -25,5 +25,6 @@ async function loadProperties() {
         properties = data;
         console.log("Properties loaded:", properties);
         savePropertiesToLocalStorage(); // Optionally save to localStorage for offline use
+        fetchedContent = true;
+        console.log("In prop: ",fetchedContent);
     });
-    

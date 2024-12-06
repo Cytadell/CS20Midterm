@@ -1,0 +1,205 @@
+/* General Styles */
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+}
+
+.property-details-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 25px;
+        max-width: 1440px;
+        margin: 0 auto;
+        gap: 40px;
+}
+
+
+.property-image-container {
+        flex: 1;
+        overflow: hidden;
+        width: 100%;
+}
+.property-info-container {
+        flex: 1;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.property-main-image {
+        object-fit: cover;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.property-title {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+}
+
+.property-address {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+        }
+
+.property-info-columns {
+        display: flex;
+        flex-direction: row; 
+        margin-top: 20px; 
+}
+
+.property-info-left, .property-info-right {
+        padding-left: 10px;
+        flex: 1; 
+}
+            
+.property-info {
+        font-size: 16px;
+        margin-bottom: 20px;
+}
+
+.property-info p {
+        margin: 5px 0;
+}
+
+.property-description {
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 20px;
+}
+.property-contact {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+}
+    
+
+.contact-btn, .favorites-btn {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+}
+
+.contact-btn:hover, .favorites-btn:hover {
+        background-color: #f0f0f0;
+        border-color: #888;
+        color: #000;
+}
+
+
+.favorites-btn.favorited {
+        border-color: #e74c3c;
+        background-color: #fceae8;
+        color: #e74c3c;
+}
+
+.favorites-icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+        transition: transform 0.2s;
+}
+
+.favorites-btn.favorited .favorites-icon {
+        transform: scale(1.2);
+}
+
+.favorites-btn .favorites-text {
+        transition: color 0.3s;
+}
+
+.back-btn-container {
+        display: flex;
+        justify-content: center;
+}
+
+.back-btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        background-color: #007BFF;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+        background-color: #0056b3;
+}
+
+
+/* Mobile Styles */
+@media (max-width: 847px) {
+        .property-details-container {
+                flex-direction: column;
+                align-items: center;
+                padding: 15px;
+                gap: 20px;
+        }
+
+        .property-image-container {
+                order: -1;
+                width: 100%;
+                margin-bottom: 15px;
+        }
+
+        .property-info-container {
+                width: 90%;
+                margin: 0 auto;
+        }
+
+        .property-main-image {
+                width: 100%;
+                height: auto;
+        }
+
+        .property-info-columns {
+                flex-direction: column;
+                gap: 15px;
+        }
+
+        .contact-btn, .favorites-btn {
+                padding: 10px;
+                font-size: 14px;
+        }
+
+        .back-btn-container {
+                padding-bottom: 10px;
+        }
+
+        .back-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+        }
+
+        .property-title {
+                font-size: 22px;
+        }
+
+        .property-description {
+                font-size: 14px;
+        }
+}

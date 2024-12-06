@@ -1,8 +1,8 @@
 // Function to render the property list
 function renderProperties(properties) {
+        console.log("Rending???");
         const propertyList = document.getElementById('property-list');
         propertyList.innerHTML = '';
-
         properties.forEach(property => {
         const propertyCard = `
                 <div class="property-card">
@@ -393,42 +393,68 @@ function syncFilters() {
 
 // Function to filter properties based on selected filters
 function filterProperties() {
+        // Load properties from localStorage if not already in memory
+        if (!properties || properties.length === 0) {
+            const storedProperties = localStorage.getItem('properties');
+            if (storedProperties) {
+                properties = JSON.parse(storedProperties);
+                console.log("Properties loaded in listings:", properties);
+            } else {
+                console.error("No properties found in localStorage.");
+                return; // Exit if no data available
+            }
+        }
+    
+        // Apply filters to properties
         const filteredProperties = properties.filter(property => {
-                // Filter by campus
-                if (selectedCampus && property.campus !== selectedCampus) return false;
-
-                // Filter by price range
-                const propertyPrice = parseInt(property.perBedroomPrice);
-                if ((minPrice && propertyPrice < minPrice) || (maxPrice && propertyPrice > maxPrice)) return false;
-
-                if (selectedPricingType.length === 1 && property.pricingType !== selectedPricingType[0]) return false;
-
-                // Filter by number of beds
-                if (selectedBeds && selectedBeds !== "Any") {
-                        if (selectedBeds === "Studio" && property.beds !== "0") return false;
-                        if (selectedBeds !== "Studio" && selectedBeds !== "4+" && property.beds !== selectedBeds) return false;
-                        if (selectedBeds === "4+" && parseInt(property.beds) < 4) return false;
-                }
-
-                // Filter by number of baths
-                if (selectedBaths && selectedBaths !== "Any") {
-                        if (selectedBaths === "3+" && parseFloat(property.baths) < 3) return false;
-                        if (selectedBaths !== "3+" && parseFloat(property.baths) !== parseFloat(selectedBaths)) return false;
-                }
-
-                // Filter by building type
-                if (selectedBuildingType.length && !selectedBuildingType.includes(property.buildingType)) return false;
-
-                return true;
+            // Filter by campus
+            if (selectedCampus && property.campus !== selectedCampus) return false;
+    
+            // Filter by price range
+            const propertyPrice = parseInt(property.perBedroomPrice, 10);
+            if ((minPrice && propertyPrice < minPrice) || (maxPrice && propertyPrice > maxPrice)) return false;
+    
+            // Filter by pricing type
+            if (selectedPricingType.length === 1 && property.pricingType !== selectedPricingType[0]) return false;
+    
+            // Filter by number of beds
+            if (selectedBeds && selectedBeds !== "Any") {
+                if (selectedBeds === "Studio" && property.beds !== "0") return false;
+                if (selectedBeds !== "Studio" && selectedBeds !== "4+" && property.beds !== selectedBeds) return false;
+                if (selectedBeds === "4+" && parseInt(property.beds, 10) < 4) return false;
+            }
+    
+            // Filter by number of baths
+            if (selectedBaths && selectedBaths !== "Any") {
+                if (selectedBaths === "3+" && parseFloat(property.baths) < 3) return false;
+                if (selectedBaths !== "3+" && parseFloat(property.baths) !== parseFloat(selectedBaths)) return false;
+            }
+    
+            // Filter by building type
+            if (selectedBuildingType.length && !selectedBuildingType.includes(property.buildingType)) return false;
+    
+            return true;
         });
-
+    
         // Render filtered properties
         renderProperties(filteredProperties);
         // Update the Clear button state
         updateClearButtonState();
 }
-    
+
+
+async function start_page(){
+        console.log("starting page");
+        const properties = await loadProperties();
+        console.log("Load at start: ", properties);
         renderProperties(properties);
         updateClearButtonState();
         addMobileListeners();
         addDesktopListener();
+}
+
+console.log("Is this even on??");
+document.addEventListener("DOMContentLoaded", function () {
+        console.log("DOM fully loaded. Starting page...");
+        start_page();
+});
