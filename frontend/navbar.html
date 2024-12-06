@@ -9,6 +9,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Midterm Project</title>
+    <!-- Include Google's Platform Library -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <meta name="google-signin-client_id" content="672337419683-7pqj3b43qk3251t6c1g4eqib4nue7mte.apps.googleusercontent.com">
     <style>
         header {
             height: 80px;
@@ -57,7 +60,7 @@
             color: #000; 
         }
 
-        .navbar a.contact {
+        .navbar a.auth {
             background-color: #d45f00; 
             color: white;
             font-weight: bold;
@@ -68,7 +71,7 @@
             padding: 0 20px;
         }
 
-        .navbar a.contact:hover {
+        .navbar a.auth:hover {
             background-color: #d45f00c3;
             color: white;
         }
@@ -175,6 +178,7 @@
                 <a href="listings.html">Our Houses</a>
                 <a href="OurHouses.html">Map of Houses</a>
                 <a href="FAQ.html">FAQs</a>
+                <a href="contactus.html">Contact Us</a>
         </div>
 
         <div class="dropdown">
@@ -188,14 +192,82 @@
                 <a href="listings.html">Our Houses</a>
                 <a href="OurHouses.html">Map of Houses</a>
                 <a href="FAQ.html">FAQs</a>
+                <a href="contactus.html">Contact Us</a>
             </div> 
         </div>
 
-        <a href="contactus.html" class="contact"><strong>Contact Us</strong></a>
+            
+        <!-- <a href="#" class="auth" onclick="startGoogleSignIn()"><strong>Sign-in/Sign-up</strong></a> -->
+
+        <!-- Google Sign-In Button -->
+        <div id="g_id_onload"
+            data-client_id="672337419683-7pqj3b43qk3251t6c1g4eqib4nue7mte.apps.googleusercontent.com"
+            data-context="signin"
+            data-ux_mode="popup"
+            data-callback="handleCredentialResponse">
+        </div>
+        <div class="g_id_signin"
+            data-type="standard"
+            data-shape="rectangular"
+            data-theme="outline"
+            data-text="sign_in_with"
+            data-size="large">
+        </div>
+        <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+        <!-- <a href="#" onclick="signOut();">Sign out</a> -->
+
 
     </nav>
 </header>
+<script>
+        // function onSignIn(googleUser) {
+        //     var profile = googleUser.getBasicProfile();
+        //     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        //     console.log('Name: ' + profile.getName());
+        //     console.log('Image URL: ' + profile.getImageUrl());
+        //     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+        // }
 
+        // Handle the Google Sign-In response
+        function handleCredentialResponse(response) {
+            // Decode the JWT token received from Google
+            const idToken = response.credential;
+            console.log("Encoded JWT ID token: ", idToken);
+
+            // Send the ID token to your backend for verification
+            fetch('/backend/google_login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: idToken }),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.user) {
+                    console.log("User logged in:", data.user);
+                    // Update UI with user details
+                    document.getElementById('user-info').innerHTML = `
+                        <p>Welcome, ${data.user.name}</p>
+                        <img src="${data.user.picture}" alt="Profile Picture" class="profile-picture">
+                    `;
+                    document.getElementById('sign-out').style.display = 'block';
+                } else {
+                    console.error("Login failed:", data.error);
+                }
+            })
+            .catch((error) => {
+                console.error("Error during login:", error);
+            });
+        }
+
+        // function signOut() {
+        //     var auth2 = gapi.auth2.getAuthInstance();
+        //     auth2.signOut().then(function () {
+        //     console.log('User signed out.');
+        //     });
+        // }
+</script>
 <body>
 </body>
 </html>
