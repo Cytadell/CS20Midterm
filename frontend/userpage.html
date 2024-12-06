@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JumboSpace: My Account</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .account-page {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: white;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .profile-pic {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #888;
+        }
+
+        .user-info {
+            margin-left: 10px;
+        }
+
+        .user-info h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .user-info p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .change-email {
+            padding: 8px 12px;
+            font-size: 14px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .change-email:hover {
+            background: #0056b3;
+        }
+
+        .favorites, .listings, .applications {
+            flex: 1;
+            margin-top: 20px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .items {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .item {
+            width: 60px;
+            height: 60px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .account-page {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar-placeholder"></div>
+    
+    <div class="account-page">
+        <div class="header">
+            <div class="profile-pic">👤</div>
+            <div class="user-info">
+                <h3>Name</h3>
+                <p>Email</p>
+            </div>
+            <button class="change-email">Change Email</button>
+        </div>
+        
+        <div class="favorites">
+            <div class="section-title">Favorites</div>
+            <div class="items">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+            </div>
+        </div>
+
+        <div class="listings">
+            <div class="section-title">Listings</div>
+            <div class="items">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+            </div>
+        </div>
+
+        <div class="applications">
+            <div class="section-title">Applications</div>
+            <div class="items">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+                <div class="item">4</div>
+                <div class="item">5</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
