@@ -1,39 +1,39 @@
-// Function to render the property list
 function renderProperties(properties) {
-        console.log("Rending???");
         const propertyList = document.getElementById('property-list');
         propertyList.innerHTML = '';
+    
         properties.forEach(property => {
-        const propertyCard = `
+            const propertyCard = `
                 <div class="property-card">
+                    <a href="product.html?id=${property.id}" class="property-link">
+                        <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                    </a>
+                    <div class="property-header">
+                        <span class="date-posted">${property.datePosted}</span>
+                        <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
+                             alt="Favorite" class="fav-icon" 
+                             onclick="toggleFavorite(this, ${property.id})" />
+                    </div>
+                    <div class="property-details">
                         <a href="product.html?id=${property.id}" class="property-link">
-                                <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                            <h3 class="property-title">${property.title}</h3>
+                            <p class="property-address">${property.address}</p>
+                            <p class="property-info">${property.type} | ${property.price}</p>
+                            <div class="property-distance">
+                                <img src="img/walk-icon.png" alt="Walk Icon" width="16" height="16"> 
+                                ${property.distance}
+                            </div>
                         </a>
-                        <div class="property-header">
-                                <span class="date-posted">${property.datePosted}</span>
-                                <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
-                                alt="Favorite" class="fav-icon" 
-                                onclick="toggleFavorite(this, ${property.id})" /> <!-- Heart icon -->
+                        <div class="property-contact">
+                            <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
+                            <a href="contactus.html" class="contact-btn">Contact Us</a>
                         </div>
-                        <div class="property-details">
-                                <a href="product.html?id=${property.id}" class="property-link">
-                                        <h3 class="property-title">${property.title}</h3>
-                                        <p class="property-address">${property.address}</p>
-                                        <p class="property-info">${property.type} | ${property.price}</p>
-                                        <div class="property-distance">
-                                                <img src="img/walk-icon.png" alt="Walk Icon" width="16" height="16"> 
-                                                ${property.distance}
-                                        </div>
-                                </a>
-                                <div class="property-contact">
-                                <a <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
-                                <a href="contactus.html" class="contact-btn">Contact Us</a>
-                        </div>
-                        
+                    </div>
                 </div>
-        `;
-        propertyList.innerHTML += propertyCard;
+            `;
+            propertyList.innerHTML += propertyCard;
         });
+    
         updateFavoriteCount();
 }
 
@@ -441,20 +441,29 @@ function filterProperties() {
         // Update the Clear button state
         updateClearButtonState();
 }
-
-
-async function start_page(){
-        console.log("starting page");
-        const properties = await loadProperties();
-        console.log("Load at start: ", properties);
-        renderProperties(properties);
+async function start_page() {
+        console.log("Starting page...");
+        const storedProperties = localStorage.getItem('properties');
+    
+        if (storedProperties) {
+            properties = JSON.parse(storedProperties);
+            console.log("Loaded properties from localStorage:", properties);
+        } else {
+            console.log("Fetching properties from the server...");
+            properties = await loadProperties();
+            console.log("Fetched properties:", properties);
+        }
+    
+        if (properties.length > 0) {
+            renderProperties(properties); // Render properties after loading
+        } else {
+            console.error("No properties to display.");
+        }
+    
         updateClearButtonState();
         addMobileListeners();
         addDesktopListener();
-}
-
-console.log("Is this even on??");
-document.addEventListener("DOMContentLoaded", function () {
-        console.log("DOM fully loaded. Starting page...");
-        start_page();
-});
+    }
+    console.log("Hello???");
+    document.addEventListener("DOMContentLoaded", start_page);
+    
