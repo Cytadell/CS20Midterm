@@ -58,32 +58,40 @@
                         box-sizing: border-box;
                 }
 
-                button {
+                button, input[type=submit] {
                         font-size: 20px;
                         padding: 10px 20px;
+                        width: 120px; /* Ensure all buttons have the same width */
                         margin: 0 10px;
                         border: none;
                         border-radius: 5px;
+                        text-align: center; /* Align text within buttons */
+                        transition: background-color 0.3s ease;
+                }
+
+                button {
                         background-color: rgb(87, 41, 13);
                         color: white;
-                        transition: background-color 0.3s ease;
                 }
 
                 button:hover {
                         background-color: rgb(58, 28, 9);
                 }
 
-                input[type="submit"] {
-                        background-color: rgb(87, 41, 13);
+                input[type=submit] {
+                        background-color: rgb(14, 172, 0);
                         color: white;
-                        border: none;
-                        width: 100%;
-                        border-radius: 5px;
-                        font-size: 18px;
                 }
 
-                input[type="submit"]:hover {
-                        background-color: rgb(58, 28, 9);
+                input[type=submit]:hover {
+                        background-color: rgb(9, 106, 0);
+                }
+
+                .button-container, .form-step button, .form-step input[type=submit] {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
                 }
 
                 p {
@@ -152,11 +160,76 @@
                 connect you today!
                 </h2>
                 <div class="formBody">
-                        <div class="button-container">
-                                <p style="text-align: center;">Are you a...</p>
-                                <button onclick="showForm('renter')">Renter</button>
-                                <button onclick="showForm('landlord')">Landlord</button>
-                        </div>
+                        <form id="form">
+                                <div id="step-999" class="form-step">
+                                        <p style="text-align: center;">Are you a...</p>
+                                        <div class="button-container">
+                                                <button type="button" id="renterButton" onclick="nextStep(0)">Renter</button>
+                                                <button type="button" id="landButton" onclick="nextStep(1)">Landlord</button>
+                                        </div>
+                                </div>
+                                <div id="step-0" class="form-step" style="display:none;">
+                                        <p style="text-align: center;">
+                                                If you would like to rent one of our properties,
+                                                please fill out the following form.
+                                        </p>
+                                        <label for="renterName">Name:</label>
+                                        <input type="text" id="renterName" name="renterName"><br>
+                                        <label for="rphone">Phone Number:</label>
+                                        <input type="text" id="rphone" name="rphone"><br>
+                                        <label for="renterEmail">Email:</label>
+                                        <input type="email" id="renterEmail" name="renterEmail"><br>
+                                        <label for="houses">Where would you like to rent?:</label>
+                                        <input list="houses" id="houses" name="houses" placeholder="Choose address of desired home" />
+                                        <label for="renterMessage">Message(Optional):</label><br>
+                                        <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
+                                        <div class="error-message" id="error-message">Please fill in all fields.</div>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(999)">Back</button>
+                                                <input type="submit" value="Submit">
+                                        </div>
+                                </div>
+                                <div id="step-1" class="form-step" style="display:none;">
+                                        <label for="renterName">Name:</label>
+                                        <input type="text" id="renterName" name="renterName" ><br>
+                                        <label for="rphone">Phone Number:</label>
+                                        <input type="text" id="rphone" name="rphone" ><br>
+                                        <label for="renterEmail">Email:</label>
+                                        <input type="email" id="renterEmail" name="renterEmail" ><br>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(999)">Back</button>
+                                                <button type="button" onclick="nextStep(2)">Next</button>
+                                        </div>
+                                </div>
+
+                                <div id="step-2" class="form-step" style="display:none;">
+                                        <label for="address">Address:</label>
+                                        <input type="text" id="address" name="address" ><br>
+                                        <label for="type">Type:</label>
+                                        <input type="text" id="type" name="type" ><br>
+                                        <label for="price">Price:</label>
+                                        <input type="text" id="price" name="price" ><br>
+                                        <label for="distance">Distance:</label>
+                                        <input type="text" id="distance" name="distance" ><br>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(1)">Back</button>
+                                                <button type="button" onclick="nextStep(3)">Next</button>
+                                        </div>
+                                </div>
+
+                                <div id="step-3" class="form-step" style="display:none;">
+                                        <label for="datePosted">Date Posted:</label>
+                                        <input type="text" id="datePosted" name="datePosted" ><br>
+                                        <label for="campus">Campus:</label>
+                                        <input type="text" id="campus" name="campus" ><br>
+                                        <label for="image">Image:</label>
+                                        <input type="file" id="image" name="image" accept="image/*" ><br>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(2)">Back</button>
+                                                <input type="submit" value="Submit">
+                                        </div>
+                                </div>
+                        </form>
                 </div>
         </div>
 
@@ -168,91 +241,13 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-function showForm(userType) {
-        $('.button-container').fadeOut(function () {
-                let formHTML = '';
-                if (userType === 'renter') {
-                        formHTML = `
-                        <form id="renterForm">
-                                <label for="renterName">Name:</label>
-                                <input type="text" id="renterName" name="renterName"><br>
-                                <label for="rphone">Phone Number:</label>
-                                <input type="text" id="rphone" name="rphone"><br>
-                                <label for="renterEmail">Email:</label>
-                                <input type="email" id="renterEmail" name="renterEmail"><br>
-                                <label for="houses">Where would you like to rent?:</label>
-                                <input list="houses" id="houses" name="houses" placeholder="Choose address of desired home" />
-                                <label for="renterMessage">Message(Optional):</label><br>
-                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                                <div class="error-message" id="error-message">Please fill in all fields.</div>
-                                <input type="submit" value="Submit">
-                        </form>
-                        <datalist id="houses">
-                                <option value="15 Saint James Avenue" />
-                                <option value="240 Sidney St" />
-                                <option value="100-150 Exchange St" />
-                                <option value="101 Mill Rd" />
-                                <option value="114 Yorktown Street" />
-                                <option value="235 Old Colony Ave" />
-                                <option value="34 Chetwynd Road" />
-                                <option value="50 Clarendon St" />
-                                <option value="75 Park St" />
-                                <option value="200 Mystic Ave" />
-                                <option value="40 Charles St" />
-                                <option value="55 Pearl St" />
-                                <option value="112 Mill St" />
-                                <option value="210 River St" />
-                                <option value="30 Elm St" />
-                                <option value="75 Riverside Ave" />
-                                <option value="160 Highland Ave" />
-                                <option value="270 Broadway" />
-                                <option value="85 Columbus Ave" />
-                                <option value="67 Summit St" />
-                                <option value="22 Victory Rd" />
-                                <option value="78 Central St" />
-                                <option value="12 Canal St" />
-                                <option value="5 Union Sq" />
-                        </datalist>
-                        <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
-                        `;
-                } else if (userType === 'landlord') {
-                        formHTML = `
-                        <form id="renterForm">
-                                <label for="renterName">Name:</label>
-                                <input type="text" id="renterName" name="renterName"><br>
-                                <label for="rphone">Phone Number:</label>
-                                <input type="text" id="rphone" name="rphone"><br>
-                                <label for="renterEmail">Email:</label>
-                                <input type="email" id="renterEmail" name="renterEmail"><br>
-                                <label for="renterMessage">Message(Optional):</label><br>
-                                <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
-                                <div class="error-message" id="error-message">Please fill in all fields.</div>
-                                <input type="submit" value="Submit">
-                        </form>
-                        <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
-                        `;
-                }
-                
-                $('.formBody').html(formHTML).fadeIn();
-
-                document.querySelector('#renterForm').addEventListener("submit", function(event) {
-                        const errorMessage = document.getElementById('error-message');
-                        const thankYouMessage = document.getElementById('thank-you-message');
-                        const nameInput = document.getElementById('renterName');
-                        const phoneInput = document.getElementById('rphone');
-                        const emailInput = document.getElementById('renterEmail');
-                        
-                        if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
-                                event.preventDefault();
-                                errorMessage.style.display = "block";
-                        } else {
-                                event.preventDefault();
-                                errorMessage.style.display = "none";
-                                $('#renterForm').fadeOut(function() {
-                                        thankYouMessage.style.display = "block";
-                                });
-                        }
-                });
-        });
+function nextStep(step) {
+    $('.form-step:visible').fadeOut(250, function () {
+        $(`#step-${step}`).fadeIn(250);
+    });
 }
+
+$(document).ready(function () {
+    $('#step-999').fadeIn(250);
+});
 </script>
