@@ -163,6 +163,15 @@
 </head>
 
 <header>
+    <?php if(isset($_COOKIE['id']) && isset($_COOKIE['sess'])){
+        $Controller = new Controller;
+        if($Controller -> checkUserStatus($_COOKIE['id'], $_COOKIE['sess'])){
+            echo $Controller -> printData(intval($_COOKIE['id']));
+            echo '<a href="logout.php">Log Out</a>';
+        }
+        
+    }else{ ?>
+
     <div class="logo">
         <a href="index.html">
             <img src="img/logo.png" alt="Company Logo">
@@ -218,6 +227,7 @@
 
 
     </nav>
+        <?php } ?>
 </header>
 <script>
         // function onSignIn(googleUser) {

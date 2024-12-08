@@ -1,5 +1,6 @@
 <?php
-session_start();
-session_destroy();
-echo json_encode(["message" => "Logged out successfully"]);
+setcookie('id', '', time() - 60*60*24*30, '/'); 
+setcookie('sess', '', time() - 60*60*24*30, '/');
+header('Location: dashboard.php');
+die();
 ?>
