@@ -443,16 +443,9 @@ function filterProperties() {
 }
 async function start_page() {
         console.log("Starting page...");
-        const storedProperties = localStorage.getItem('properties');
-    
-        if (storedProperties) {
-            properties = JSON.parse(storedProperties);
-            console.log("Loaded properties from localStorage:", properties);
-        } else {
-            console.log("Fetching properties from the server...");
-            properties = await loadProperties();
-            console.log("Fetched properties:", properties);
-        }
+        console.log("Fetching properties from the server...");
+        const properties = await loadProperties();
+        console.log("Fetched properties:", properties);
     
         if (properties.length > 0) {
             renderProperties(properties); // Render properties after loading

@@ -12,9 +12,9 @@ function loadPropertyDetails() {
         }
         
         document.getElementById('property-details-container').innerHTML = `
-        <div class="property-image-container">
+        <div class="property-image-container" id="image-container">
                         <img src="${property.imageUrl}" alt="${property.title}" class="property-main-image">
-                </div>
+        </div>
 
                 <div class="property-info-container">
                         <h1 class="property-title">${property.title}</h1>
