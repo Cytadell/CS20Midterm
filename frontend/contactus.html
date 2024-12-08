@@ -186,16 +186,16 @@
                                         <div class="error-message" id="error-message">Please fill in all fields.</div>
                                         <div class="button-container">
                                                 <button type="button" onclick="nextStep(999)">Back</button>
-                                                <input type="submit" value="Submit">
+                                                <input type="submit" value="Submit" id="submit-renter">
                                         </div>
                                 </div>
                                 <div id="step-1" class="form-step" style="display:none;">
-                                        <label for="renterName">Name:</label>
-                                        <input type="text" id="renterName" name="renterName" ><br>
-                                        <label for="rphone">Phone Number:</label>
-                                        <input type="text" id="rphone" name="rphone" ><br>
-                                        <label for="renterEmail">Email:</label>
-                                        <input type="email" id="renterEmail" name="renterEmail" ><br>
+                                        <label for="landname">Name:</label>
+                                        <input type="text" id="landname" name="landname" ><br>
+                                        <label for="lphone">Phone Number:</label>
+                                        <input type="text" id="lphone" name="lphone" ><br>
+                                        <label for="lEmail">Email:</label>
+                                        <input type="email" id="lEmail" name="lEmail" ><br>
                                         <div class="button-container">
                                                 <button type="button" onclick="nextStep(999)">Back</button>
                                                 <button type="button" onclick="nextStep(2)">Next</button>
@@ -224,12 +224,14 @@
                                         <input type="text" id="campus" name="campus" ><br>
                                         <label for="image">Image:</label>
                                         <input type="file" id="image" name="image" accept="image/*" ><br>
+                                        <div class="error-message" id="error-message">Please fill in all fields.</div>
                                         <div class="button-container">
                                                 <button type="button" onclick="nextStep(2)">Back</button>
-                                                <input type="submit" value="Submit">
+                                                <input type="submit" value="Submit" id="submit-landlord">
                                         </div>
                                 </div>
                         </form>
+                        <div class="thank-you-message" id="thank-you-message">Thank you for your message! We'll get back to you soon.</div>
                 </div>
         </div>
 
@@ -241,6 +243,71 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+document.querySelector('#form').addEventListener("submit", function(event) {
+        event.preventDefault();        
+        const clickedButton = document.activeElement;
+
+        const errorMessages = document.querySelectorAll('#error-message');
+        const thankYouMessage = document.getElementById('thank-you-message');
+
+        if (clickedButton.id === "submit-renter") {
+                const nameInput = document.getElementById('renterName');
+                const phoneInput = document.getElementById('rphone');
+                const emailInput = document.getElementById('renterEmail');
+                if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
+                        errorMessages.forEach((errorMessage, index) => {
+                                errorMessage.style.display = "block";
+                        });
+                } else {
+                        console.log("Renter form submitted");
+                        errorMessages.forEach((errorMessage, index) => {
+                                errorMessage.style.display = "none";
+                        });
+                        $('#form').fadeOut(function() {
+                                thankYouMessage.style.display = "block";
+                        });
+                }
+        } 
+        else{
+                const nameInput = document.getElementById('landname');
+                const phoneInput = document.getElementById('lphone');
+                const emailInput = document.getElementById('lEmail');
+                const addressInput = document.getElementById('address');
+                const typeInput = document.getElementById('type');
+                const priceInput = document.getElementById('price');
+                const distranceInput = document.getElementById('distance');
+                const dateInput = document.getElementById('datePosted');
+                const campusInput = document.getElementById('campus');
+                const imageInput = document.getElementById('image');
+                if (nameInput.value.trim() === "" || 
+                        phoneInput.value.trim() === "" || 
+                        emailInput.value.trim() === "" ||
+                        addressInput.value.trim() === "" ||
+                        typeInput.value.trim() === "" ||
+                        distranceInput.value.trim() === "" ||
+                        dateInput.value.trim() === "" ||
+                        campusInput.value.trim() === "" ||
+                        imageInput === null) 
+                {
+                        console.log("Landlord form failed");
+                        errorMessages.forEach((errorMessage, index) => {
+                                errorMessage.style.display = "block";
+                        });
+                } else {
+                        console.log("Landlord form submitted");
+                        errorMessages.forEach((errorMessage, index) => {
+                                errorMessage.style.display = "none";
+                        });
+                        $('#form').fadeOut(function() {
+                                thankYouMessage.style.display = "block";
+                        });
+                }
+        }
+                        
+});
+
+
 function nextStep(step) {
     $('.form-step:visible').fadeOut(250, function () {
         $(`#step-${step}`).fadeIn(250);
@@ -250,4 +317,5 @@ function nextStep(step) {
 $(document).ready(function () {
     $('#step-999').fadeIn(250);
 });
+
 </script>
