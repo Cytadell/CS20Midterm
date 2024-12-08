@@ -48,7 +48,7 @@
                         margin-left: 5px;
                 }
 
-                input, textarea {
+                input, textarea, select {
                         font-size: 18px;
                         padding: 10px;
                         width: 95%;
@@ -203,14 +203,19 @@
                                 </div>
 
                                 <div id="step-2" class="form-step" style="display:none;">
+                                        <label for="landtitle">Your Property Title:</label>
+                                        <input type="text" id="landtitle" name="landtitle" ><br>
                                         <label for="address">Address:</label>
                                         <input type="text" id="address" name="address" ><br>
-                                        <label for="type">Type:</label>
-                                        <input type="text" id="type" name="type" ><br>
                                         <label for="price">Price:</label>
-                                        <input type="text" id="price" name="price" ><br>
-                                        <label for="distance">Distance:</label>
-                                        <input type="text" id="distance" name="distance" ><br>
+                                        <input type="number" id="price" name="price" ><br>
+                                        <label for="pricetype">Pricing Type:</label>
+                                        <select id="pricetype" name="pricetype">
+                                                <option value="Per Unit">Per Unit</option>
+                                                <option value="Per Bedroom">Per Bedroom</option>
+                                        </select><br>
+                                        <label for="distance">Distance from Campus (miles):</label>
+                                        <input type="number" id="distance" name="distance" ><br>
                                         <div class="button-container">
                                                 <button type="button" onclick="nextStep(1)">Back</button>
                                                 <button type="button" onclick="nextStep(3)">Next</button>
@@ -218,15 +223,71 @@
                                 </div>
 
                                 <div id="step-3" class="form-step" style="display:none;">
-                                        <label for="datePosted">Date Posted:</label>
-                                        <input type="text" id="datePosted" name="datePosted" ><br>
                                         <label for="campus">Campus:</label>
-                                        <input type="text" id="campus" name="campus" ><br>
+                                        <select id="campus" name="campus">
+                                                <option value="Medford/Somerville">Medford/Somerville</option>
+                                                <option value="Boston">Boston</option>
+                                        </select><br>
                                         <label for="image">Image:</label>
                                         <input type="file" id="image" name="image" accept="image/*" ><br>
-                                        <div class="error-message" id="error-message">Please fill in all fields.</div>
+                                        
                                         <div class="button-container">
                                                 <button type="button" onclick="nextStep(2)">Back</button>
+                                                <button type="button" onclick="nextStep(4)">Next</button>
+                                        </div>
+                                </div>
+                                <div id="step-4" class="form-step" style="display:none;">
+                                        <label for="buildtype">Building Type:</label>
+                                        <select id="buildtype" name="buildtype">
+                                                <option value="House">House</option>
+                                                <option value="Apartment">Apartment</option>
+                                                <option value="Condo">Condo</option>
+                                                <option value="Duplex">Duplex</option>
+                                                <option value="Triplex">Triplex</option>
+                                        </select><br>
+                                        <label for="bed">Bedrooms:</label>
+                                        <input type="number" id="bed" name="bed" ><br>
+                                        <label for="bath">Bathrooms:</label>
+                                        <input type="text" id="bath" name="bath" ><br>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(3)">Back</button>
+                                                <button type="button" onclick="nextStep(5)">Next</button>
+                                        </div>
+                                </div>
+                                <div id="step-5" class="form-step" style="display:none;">
+                                        <label for="wifi">Wifi:</label>
+                                        <select id="wifi" name="wifi">
+                                                <option value="None">None</option>
+                                                <option value="100Mbs">100Mbs</option>
+                                                <option value="200Mbs">200Mbs</option>
+                                                <option value="300Mbs">300Mbs</option>
+                                                <option value="400Mbs+">400Mbs+</option>
+                                        </select><br>
+                                        <label for="utilities">Utilities Costs:</label>
+                                        <select id="utilities" name="utilities">
+                                                <option value="Included">Included in Rent</option>
+                                                <option value="Not Included">Not Included in Rent</option>
+                                        </select><br>
+                                        <label for="laundry">Laundry:</label>
+                                        <select id="laundry" name="laundry">
+                                                <option value="In-Unit">In-Unit</option>
+                                                <option value="On-Site">On-Site</option>
+                                                <option value="Not Included">Not Included</option>
+                                        </select><br>
+                                        <label for="furnished">Furnished:</label>
+                                        <select id="furnished" name="furnished">
+                                                <option value="Furnished">Furnished</option>
+                                                <option value="Partially Furnished">Partially Furnished</option>
+                                                <option value="Not Furnished">Not Furnished</option>
+                                        </select><br>
+                                        <label for="pet">Pets:</label>
+                                        <select id="pet" name="pet">
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                        </select><br>
+                                        <div class="error-message" id="error-message">Please fill in all fields.</div>
+                                        <div class="button-container">
+                                                <button type="button" onclick="nextStep(4)">Back</button>
                                                 <input type="submit" value="Submit" id="submit-landlord">
                                         </div>
                                 </div>
@@ -243,70 +304,129 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-
 document.querySelector('#form').addEventListener("submit", function(event) {
-        event.preventDefault();        
-        const clickedButton = document.activeElement;
+    event.preventDefault();        
+    const clickedButton = document.activeElement;
 
-        const errorMessages = document.querySelectorAll('#error-message');
-        const thankYouMessage = document.getElementById('thank-you-message');
+    const errorMessages = document.querySelectorAll('#error-message');
+    const thankYouMessage = document.getElementById('thank-you-message');
+    const formData = new FormData(); // For sending data
 
-        if (clickedButton.id === "submit-renter") {
-                const nameInput = document.getElementById('renterName');
-                const phoneInput = document.getElementById('rphone');
-                const emailInput = document.getElementById('renterEmail');
-                if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
-                        errorMessages.forEach((errorMessage, index) => {
-                                errorMessage.style.display = "block";
-                        });
-                } else {
-                        console.log("Renter form submitted");
-                        errorMessages.forEach((errorMessage, index) => {
-                                errorMessage.style.display = "none";
-                        });
-                        $('#form').fadeOut(function() {
-                                thankYouMessage.style.display = "block";
-                        });
-                }
-        } 
-        else{
-                const nameInput = document.getElementById('landname');
-                const phoneInput = document.getElementById('lphone');
-                const emailInput = document.getElementById('lEmail');
-                const addressInput = document.getElementById('address');
-                const typeInput = document.getElementById('type');
-                const priceInput = document.getElementById('price');
-                const distranceInput = document.getElementById('distance');
-                const dateInput = document.getElementById('datePosted');
-                const campusInput = document.getElementById('campus');
-                const imageInput = document.getElementById('image');
-                if (nameInput.value.trim() === "" || 
-                        phoneInput.value.trim() === "" || 
-                        emailInput.value.trim() === "" ||
-                        addressInput.value.trim() === "" ||
-                        typeInput.value.trim() === "" ||
-                        distranceInput.value.trim() === "" ||
-                        dateInput.value.trim() === "" ||
-                        campusInput.value.trim() === "" ||
-                        imageInput === null) 
-                {
-                        console.log("Landlord form failed");
-                        errorMessages.forEach((errorMessage, index) => {
-                                errorMessage.style.display = "block";
-                        });
-                } else {
-                        console.log("Landlord form submitted");
-                        errorMessages.forEach((errorMessage, index) => {
-                                errorMessage.style.display = "none";
-                        });
-                        $('#form').fadeOut(function() {
-                                thankYouMessage.style.display = "block";
-                        });
-                }
+    if (clickedButton.id === "submit-renter") {
+        // Collect Renter form data
+        const nameInput = document.getElementById('renterName');
+        const phoneInput = document.getElementById('rphone');
+        const emailInput = document.getElementById('renterEmail');
+
+        if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
+            errorMessages.forEach(errorMessage => errorMessage.style.display = "block");
+        } else {
+            // Prepare data for renter submission
+            formData.append('name', nameInput.value.trim());
+            formData.append('phone', phoneInput.value.trim());
+            formData.append('email', emailInput.value.trim());
+
+            // Submit to renter PHP
+            fetch('renter.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Renter form response:", data);
+                errorMessages.forEach(errorMessage => errorMessage.style.display = "none");
+                $('#form').fadeOut(function() {
+                    thankYouMessage.style.display = "block";
+                });
+            })
+            .catch(error => console.error("Error:", error));
         }
-                        
-});
+    } else if (clickedButton.id === "submit-landlord") {
+        // Collect Landlord form data
+        const nameInput = document.getElementById('landname');
+        const phoneInput = document.getElementById('lphone');
+        const emailInput = document.getElementById('lEmail');
+        const landtitle = document.getElementById('landtitle');
+        const addressInput = document.getElementById('address');
+        const priceInput = document.getElementById('price');
+        const distanceInput = document.getElementById('distance');
+        const campusInput = document.getElementById('campus');
+        const pricetypeInput = document.getElementById('pricetype');
+        const buildtypeInput = document.getElementById('buildtype');
+        const bedInput = document.getElementById('bed');
+        const bathInput = document.getElementById('bath');
+        const wifiInput = document.getElementById('wifi');
+        const utilitiesInput = document.getElementById('utilities');
+        const laundryInput = document.getElementById('laundry');
+        const furnishedInput = document.getElementById('furnished');
+        const petInput = document.getElementById('pet');
+        const imageInput = document.getElementById('image');
 
+        // Validation for required fields
+        if (
+            nameInput.value.trim() === "" || 
+            phoneInput.value.trim() === "" || 
+            emailInput.value.trim() === "" ||
+            landtitle.value.trim() === "" ||
+            addressInput.value.trim() === "" ||
+            priceInput.value.trim() === "" ||
+            distanceInput.value.trim() === "" ||
+            campusInput.value.trim() === "" ||
+            pricetypeInput.value.trim() === "" ||
+            buildtypeInput.value.trim() === "" ||
+            bedInput.value.trim() === "" ||
+            bathInput.value.trim() === "" ||
+            wifiInput.value.trim() === "" ||
+            utilitiesInput.value.trim() === "" ||
+            laundryInput.value.trim() === "" ||
+            furnishedInput.value.trim() === "" ||
+            petInput.value.trim() === "" ||
+            imageInput.files.length === 0 ||
+            isNaN(Number(priceInput.value)) ||
+            isNaN(Number(distanceInput.value)) ||
+            isNaN(Number(bedInput.value)) ||
+            isNaN(Number(bathInput.value))
+        ) {
+            errorMessages.forEach(errorMessage => errorMessage.style.display = "block");
+        } else {
+            // Prepare data for landlord submission
+            formData.append('name', nameInput.value.trim());
+            formData.append('phone', phoneInput.value.trim());
+            formData.append('email', emailInput.value.trim());
+            formData.append('landtitle', landtitle.value.trim());
+            formData.append('address', addressInput.value.trim());
+            formData.append('type', buildtypeInput.value.trim());
+            formData.append('price', priceInput.value.trim());
+            formData.append('distance', distanceInput.value.trim());
+            formData.append('campus', campusInput.value.trim());
+            formData.append('pricetype', pricetypeInput.value.trim());
+            formData.append('buildtype', buildtypeInput.value.trim());
+            formData.append('bed', bedInput.value.trim());
+            formData.append('bath', bathInput.value.trim());
+            formData.append('wifi', wifiInput.value.trim());
+            formData.append('utilities', utilitiesInput.value.trim());
+            formData.append('laundry', laundryInput.value.trim());
+            formData.append('furnished', furnishedInput.value.trim());
+            formData.append('pet', petInput.value.trim());
+            formData.append('image', imageInput.files[0]); // Include the image file
+             
+            // Submit to landlord PHP
+            fetch('landlord.php', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log("Landlord form response:", data);
+                errorMessages.forEach(errorMessage => errorMessage.style.display = "none");
+                $('#form').fadeOut(function() {
+                    thankYouMessage.style.display = "block";
+                });
+            })
+            .catch(error => console.error("Error:", error));
+        }
+    }
+});
 
 function nextStep(step) {
     $('.form-step:visible').fadeOut(250, function () {
@@ -317,5 +437,4 @@ function nextStep(step) {
 $(document).ready(function () {
     $('#step-999').fadeIn(250);
 });
-
 </script>
