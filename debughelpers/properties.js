@@ -1,6 +1,6 @@
 async function loadProperties() {
         try {
-            const response = await fetch('getProperties.php');
+            const response = await fetch('backend/getProperties.php');
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -23,5 +23,4 @@ async function loadProperties() {
         properties = data;
         console.log("Properties loaded:", properties);
         savePropertiesToLocalStorage();
-        console.log("In prop: ",fetchedContent);
     });

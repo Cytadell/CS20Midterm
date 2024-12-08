@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 // Database connection
-$conn = new mysqli('localhost', 'ug98aliywitj2', 'zt9qdwgsmdo5', 'db6madmwhxsmg0');
+$conn = new mysqli('localhost', 'uvu8gbrv0khs9', '[7g3c{2~Ow@&', 'db6madmwhxsmg0');
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -20,7 +20,7 @@ $properties = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         // Add a dynamic URL to access the image
-        $row['imageUrl'] = 'getImage.php?id=' . $row['id'];
+        $row['imageUrl'] = 'backend/getImage.php?id=' . $row['id'];
         $properties[] = $row;
     }
 }
