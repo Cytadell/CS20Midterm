@@ -18,7 +18,7 @@ if (!isset($_GET['id'])) {
 $id = intval($_GET['id']); // Sanitize input
 
 // Query the database to retrieve the image
-$sql = "SELECT image FROM mytable WHERE id = ?";
+$sql = "SELECT SQL_NO_CACHE image FROM mytable WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $id);
 $stmt->execute();

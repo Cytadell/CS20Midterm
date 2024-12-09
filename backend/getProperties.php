@@ -11,7 +11,7 @@ if ($conn->connect_error) {
 }
 
 // Query the database
-$sql = "SELECT id, title, address, type, price, distance, datePosted, phone, campus, perBedroomPrice, 
+$sql = "SELECT SQL_NO_CACHE id, title, address, type, price, distance, datePosted, phone, campus, perBedroomPrice, 
         pricingType, buildingType, beds, baths, utilities, laundry, furnished, transport, pet, wifi 
         FROM mytable";
 $result = $conn->query($sql);
