@@ -429,12 +429,36 @@ document.querySelector('#form').addEventListener("submit", function(event) {
 });
 
 function nextStep(step) {
-    $('.form-step:visible').fadeOut(250, function () {
-        $(`#step-${step}`).fadeIn(250);
-    });
+    if (step === 0 || step === 1) {
+        // Perform authentication check for restricted steps
+        fetch('/!JUMBOSPACE!/backend/usercheck.php', { method: 'GET' })
+            .then(response => {
+                if (response.status === 401) {
+                    throw new Error("Unauthorized access. Redirecting to login...");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.authenticated) {
+                    // User authenticated; proceed to the step
+                    $('.form-step:visible').fadeOut(250, function () {
+                        $(`#step-${step}`).fadeIn(250);
+                    });
+                } else {
+                    alert("Authentication failed. Redirecting to login.");
+                    window.location.href = '/!JUMBOSPACE!/backend/login.php';
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error.message);
+                alert("Authentication required. Redirecting to login.");
+                window.location.href = '/!JUMBOSPACE!/backend/login.php';
+            });
+    } else {
+        // Unrestricted steps
+        $('.form-step:visible').fadeOut(250, function () {
+            $(`#step-${step}`).fadeIn(250);
+        });
+    }
 }
-
-$(document).ready(function () {
-    $('#step-999').fadeIn(250);
-});
 </script>
