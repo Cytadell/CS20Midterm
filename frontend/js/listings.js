@@ -1,39 +1,39 @@
-// Function to render the property list
 function renderProperties(properties) {
         const propertyList = document.getElementById('property-list');
         propertyList.innerHTML = '';
-
+    
         properties.forEach(property => {
-        const propertyCard = `
+            const propertyCard = `
                 <div class="property-card">
+                    <a href="product.html?id=${property.id}" class="property-link">
+                        <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                    </a>
+                    <div class="property-header">
+                        <span class="date-posted">${property.datePosted}</span>
+                        <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
+                             alt="Favorite" class="fav-icon" 
+                             onclick="toggleFavorite(this, ${property.id})" />
+                    </div>
+                    <div class="property-details">
                         <a href="product.html?id=${property.id}" class="property-link">
-                                <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                            <h3 class="property-title">${property.title}</h3>
+                            <p class="property-address">${property.address}</p>
+                            <p class="property-info">${property.type} | ${property.price}</p>
+                            <div class="property-distance">
+                                <img src="img/walk-icon.png" alt="Walk Icon" width="16" height="16"> 
+                                ${property.distance}
+                            </div>
                         </a>
-                        <div class="property-header">
-                                <span class="date-posted">${property.datePosted}</span>
-                                <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
-                                alt="Favorite" class="fav-icon" 
-                                onclick="toggleFavorite(this, ${property.id})" /> <!-- Heart icon -->
+                        <div class="property-contact">
+                            <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
+                            <a href="contactus.html" class="contact-btn">Contact Us</a>
                         </div>
-                        <div class="property-details">
-                                <a href="product.html?id=${property.id}" class="property-link">
-                                        <h3 class="property-title">${property.title}</h3>
-                                        <p class="property-address">${property.address}</p>
-                                        <p class="property-info">${property.type} | ${property.price}</p>
-                                        <div class="property-distance">
-                                                <img src="img/walk-icon.png" alt="Walk Icon" width="16" height="16"> 
-                                                ${property.distance}
-                                        </div>
-                                </a>
-                                <div class="property-contact">
-                                <a <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
-                                <a href="contactus.html" class="contact-btn">Contact Us</a>
-                        </div>
-                        
+                    </div>
                 </div>
-        `;
-        propertyList.innerHTML += propertyCard;
+            `;
+            propertyList.innerHTML += propertyCard;
         });
+    
         updateFavoriteCount();
 }
 
@@ -393,42 +393,70 @@ function syncFilters() {
 
 // Function to filter properties based on selected filters
 function filterProperties() {
+        // Load properties from localStorage if not already in memory
+        if (!properties || properties.length === 0) {
+            const storedProperties = localStorage.getItem('properties');
+            if (storedProperties) {
+                properties = JSON.parse(storedProperties);
+                console.log("Properties loaded in listings:", properties);
+            } else {
+                console.error("No properties found in localStorage.");
+                return; // Exit if no data available
+            }
+        }
+    
+        // Apply filters to properties
         const filteredProperties = properties.filter(property => {
-                // Filter by campus
-                if (selectedCampus && property.campus !== selectedCampus) return false;
-
-                // Filter by price range
-                const propertyPrice = parseInt(property.perBedroomPrice);
-                if ((minPrice && propertyPrice < minPrice) || (maxPrice && propertyPrice > maxPrice)) return false;
-
-                if (selectedPricingType.length === 1 && property.pricingType !== selectedPricingType[0]) return false;
-
-                // Filter by number of beds
-                if (selectedBeds && selectedBeds !== "Any") {
-                        if (selectedBeds === "Studio" && property.beds !== "0") return false;
-                        if (selectedBeds !== "Studio" && selectedBeds !== "4+" && property.beds !== selectedBeds) return false;
-                        if (selectedBeds === "4+" && parseInt(property.beds) < 4) return false;
-                }
-
-                // Filter by number of baths
-                if (selectedBaths && selectedBaths !== "Any") {
-                        if (selectedBaths === "3+" && parseFloat(property.baths) < 3) return false;
-                        if (selectedBaths !== "3+" && parseFloat(property.baths) !== parseFloat(selectedBaths)) return false;
-                }
-
-                // Filter by building type
-                if (selectedBuildingType.length && !selectedBuildingType.includes(property.buildingType)) return false;
-
-                return true;
+            // Filter by campus
+            if (selectedCampus && property.campus !== selectedCampus) return false;
+    
+            // Filter by price range
+            const propertyPrice = parseInt(property.perBedroomPrice, 10);
+            if ((minPrice && propertyPrice < minPrice) || (maxPrice && propertyPrice > maxPrice)) return false;
+    
+            // Filter by pricing type
+            if (selectedPricingType.length === 1 && property.pricingType !== selectedPricingType[0]) return false;
+    
+            // Filter by number of beds
+            if (selectedBeds && selectedBeds !== "Any") {
+                if (selectedBeds === "Studio" && property.beds !== "0") return false;
+                if (selectedBeds !== "Studio" && selectedBeds !== "4+" && property.beds !== selectedBeds) return false;
+                if (selectedBeds === "4+" && parseInt(property.beds, 10) < 4) return false;
+            }
+    
+            // Filter by number of baths
+            if (selectedBaths && selectedBaths !== "Any") {
+                if (selectedBaths === "3+" && parseFloat(property.baths) < 3) return false;
+                if (selectedBaths !== "3+" && parseFloat(property.baths) !== parseFloat(selectedBaths)) return false;
+            }
+    
+            // Filter by building type
+            if (selectedBuildingType.length && !selectedBuildingType.includes(property.buildingType)) return false;
+    
+            return true;
         });
-
+    
         // Render filtered properties
         renderProperties(filteredProperties);
         // Update the Clear button state
         updateClearButtonState();
 }
+async function start_page() {
+        console.log("Starting page...");
+        console.log("Fetching properties from the server...");
+        const properties = await loadProperties();
+        console.log("Fetched properties:", properties);
     
-        renderProperties(properties);
+        if (properties.length > 0) {
+            renderProperties(properties); // Render properties after loading
+        } else {
+            console.error("No properties to display.");
+        }
+    
         updateClearButtonState();
         addMobileListeners();
         addDesktopListener();
+    }
+    console.log("Hello???");
+    document.addEventListener("DOMContentLoaded", start_page);
+    
