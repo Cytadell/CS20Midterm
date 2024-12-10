@@ -47,7 +47,7 @@ if (!$userId) {
 }
 
 // Fetch liked property IDs
-$sql = "SELECT property_id FROM likedProp WHERE user_id = ?";
+$sql = "SELECT property_id FROM listedProp WHERE user_id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param('i', $userId);
 $stmt->execute();

@@ -156,7 +156,7 @@
 </body>
 
 <script>
-async function loadProperties() {
+    async function loadProperties() {
         try {
             const response = await fetch('/!JUMBOSPACE!/backend/getProperties.php');
             if (!response.ok) {
@@ -169,39 +169,77 @@ async function loadProperties() {
             console.error("Error fetching properties:", error);
             return []; // Return an empty array if there’s an error
         }
-}  
-
-async function getLikedPropertyIds() {
-        try {
-            const response = await fetch('/!JUMBOSPACE!/backend/getlikedProp.php');
-            console.log(response);
-            if (!response.ok) throw new Error('Failed to fetch liked property IDs');
-            
-            return await response.json();
-        } catch (error) {
-            console.error('Error fetching liked property IDs:', error);
-            return [];
-        }
-}
-   
-async function loadLikedProperties() {
-        const likedPropertyIds = await getLikedPropertyIds();
-        const allProperties = await loadProperties();
-    
-        const likedProperties = allProperties.filter(property =>
-            likedPropertyIds.includes(property.id)
-        );
-    
-        console.log("Liked Properties:", likedProperties);
-        renderLikedProperties(likedProperties);
     }
     
-    function renderLikedProperties(properties) {
-        const favoritesSection = document.querySelector('.favorites .items');
-        favoritesSection.innerHTML = '';
+    async function getUserData(type) {
+        try {
+            const response = await fetch(`/!JUMBOSPACE!/backend/getUserData.php?type=${type}`);
+            if (!response.ok) throw new Error(`Failed to fetch ${type} property IDs`);
+            return await response.json();
+        } catch (error) {
+            console.error(`Error fetching ${type} property IDs:`, error);
+            return [];
+        }
+    }
+    
+    let properties = [];
+    let likedids = [];
+    let appliedids = [];
+    let listedids = [];
+    
+    // Load all properties
+    const loadPropertiesPromise = loadProperties().then(data => {
+        properties = data;
+        console.log("Properties loaded:", properties);
+    });
+    
+    // Load liked, applied, and listed property IDs
+    const getLikedPropertyIdsPromise = getUserData('liked').then(data => {
+        likedids = data.map(id => Number(id.property_id)); // Ensure IDs are numbers
+        console.log("Liked IDs loaded:", likedids);
+    });
+    const getAppliedPropertyIdsPromise = getUserData('applied').then(data => {
+        appliedids = data.map(id => Number(id.property_id)); // Ensure IDs are numbers
+        console.log("Applied IDs loaded:", appliedids);
+    });
+    const getListedPropertyIdsPromise = getUserData('listed').then(data => {
+        listedids = data.map(id => Number(id.property_id)); // Ensure IDs are numbers
+        console.log("Listed IDs loaded:", listedids);
+    });
+    
+    Promise.all([loadPropertiesPromise, getLikedPropertyIdsPromise, getAppliedPropertyIdsPromise, getListedPropertyIdsPromise])
+        .then(() => {
+            // Filter properties based on IDs
+            const likedProperties = properties.filter(property =>
+                likedids.includes(Number(property.id))
+            );
+            const appliedProperties = properties.filter(property =>
+                appliedids.includes(Number(property.id))
+            );
+            const listedProperties = properties.filter(property =>
+                listedids.includes(Number(property.id))
+            );
+    
+            console.log("Filtered Liked Properties:", likedProperties);
+            console.log("Filtered Applied Properties:", appliedProperties);
+            console.log("Filtered Listed Properties:", listedProperties);
+    
+            // Render properties in their respective sections
+            renderProperties(likedProperties, '.favorites .items', 'Liked Properties');
+            renderProperties(appliedProperties, '.applications .items', 'Applied Properties');
+            renderProperties(listedProperties, '.listings .items', 'Listed Properties');
+        })
+        .catch(error => {
+            console.error("Error loading properties or property IDs:", error);
+        });
+    
+    // Function to render properties
+    function renderProperties(properties, selector, title) {
+        const section = document.querySelector(selector);
+        section.innerHTML = ''; // Clear previous content
     
         if (properties.length === 0) {
-            favoritesSection.innerHTML = '<p>No liked properties found.</p>';
+            section.innerHTML = `<p>No ${title.toLowerCase()} found.</p>`;
             return;
         }
     
@@ -214,12 +252,9 @@ async function loadLikedProperties() {
                     <div>${property.title}</div>
                 </a>
             `;
-            favoritesSection.appendChild(item);
+            section.appendChild(item);
         });
     }
-    
-    // Load liked properties on page load
-    document.addEventListener('DOMContentLoaded', loadLikedProperties);
-</script>
-
+    </script>
 </html>
+    
