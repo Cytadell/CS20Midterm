@@ -180,7 +180,9 @@
                                         <label for="renterEmail">Email:</label>
                                         <input type="email" id="renterEmail" name="renterEmail"><br>
                                         <label for="houses">Where would you like to rent?:</label>
-                                        <input list="houses" id="houses" name="houses" placeholder="Choose address of desired home" />
+                                        <select id="houses" name="houses">
+                                                <option value="" disabled selected>Select a property</option>
+                                        </select><br>
                                         <label for="renterMessage">Message(Optional):</label><br>
                                         <textarea id="renterMessage" name="renterMessage" rows="4"></textarea><br>
                                         <div class="error-message" id="error-message">Please fill in all fields.</div>
@@ -317,17 +319,20 @@ document.querySelector('#form').addEventListener("submit", function(event) {
         const nameInput = document.getElementById('renterName');
         const phoneInput = document.getElementById('rphone');
         const emailInput = document.getElementById('renterEmail');
+        const propInput = document.getElementById('houses');
 
-        if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === "") {
+        if (nameInput.value.trim() === "" || phoneInput.value.trim() === "" || emailInput.value.trim() === ""
+                || propInput.value.trim() === "") {
             errorMessages.forEach(errorMessage => errorMessage.style.display = "block");
         } else {
             // Prepare data for renter submission
             formData.append('name', nameInput.value.trim());
             formData.append('phone', phoneInput.value.trim());
             formData.append('email', emailInput.value.trim());
+            formData.append('property_id', propInput.value.trim());
 
             // Submit to renter PHP
-            fetch('renter.php', {
+            fetch('/!JUMBOSPACE!/backend/renter.php', {
                 method: 'POST',
                 body: formData,
             })
@@ -461,4 +466,32 @@ function nextStep(step) {
         });
     }
 }
+
+async function loadPropertyOptions() {
+        try {
+            const response = await fetch('/!JUMBOSPACE!/backend/getProperties.php');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const properties = await response.json();
+
+            // Populate the select element
+            const select = document.getElementById('houses');
+            select.innerHTML = '<option value="" disabled selected>Select a property</option>'; // Clear existing options and add default
+
+            properties.forEach(property => {
+                const option = document.createElement('option');
+                option.value = property.id; // Use the property ID as the value
+                option.textContent = property.title; // Use the property name/title as the display text
+                select.appendChild(option);
+            });
+
+            console.log('Property options loaded and select updated.');
+        } catch (error) {
+            console.error('Error fetching property options:', error);
+        }
+    }
+
+    // Load property options when the page loads
+    document.addEventListener('DOMContentLoaded', loadPropertyOptions);
 </script>
