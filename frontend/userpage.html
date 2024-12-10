@@ -154,4 +154,72 @@
         </div>
     </div>
 </body>
+
+<script>
+async function loadProperties() {
+        try {
+            const response = await fetch('/!JUMBOSPACE!/backend/getProperties.php');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            localStorage.setItem('properties', JSON.stringify(data));
+            return data;
+        } catch (error) {
+            console.error("Error fetching properties:", error);
+            return []; // Return an empty array if there’s an error
+        }
+}  
+
+async function getLikedPropertyIds() {
+        try {
+            const response = await fetch('/!JUMBOSPACE!/backend/getlikedProp.php');
+            console.log(response);
+            if (!response.ok) throw new Error('Failed to fetch liked property IDs');
+            
+            return await response.json();
+        } catch (error) {
+            console.error('Error fetching liked property IDs:', error);
+            return [];
+        }
+}
+   
+async function loadLikedProperties() {
+        const likedPropertyIds = await getLikedPropertyIds();
+        const allProperties = await loadProperties();
+    
+        const likedProperties = allProperties.filter(property =>
+            likedPropertyIds.includes(property.id)
+        );
+    
+        console.log("Liked Properties:", likedProperties);
+        renderLikedProperties(likedProperties);
+    }
+    
+    function renderLikedProperties(properties) {
+        const favoritesSection = document.querySelector('.favorites .items');
+        favoritesSection.innerHTML = '';
+    
+        if (properties.length === 0) {
+            favoritesSection.innerHTML = '<p>No liked properties found.</p>';
+            return;
+        }
+    
+        properties.forEach(property => {
+            const item = document.createElement('div');
+            item.className = 'item';
+            item.innerHTML = `
+                <a href="product.html?id=${property.id}">
+                    <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                    <div>${property.title}</div>
+                </a>
+            `;
+            favoritesSection.appendChild(item);
+        });
+    }
+    
+    // Load liked properties on page load
+    document.addEventListener('DOMContentLoaded', loadLikedProperties);
+</script>
+
 </html>
