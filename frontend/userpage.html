@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JumboSpace: My Account</title>
+    <link rel="stylesheet" href="css/listings.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,11 +85,14 @@
 
         .items {
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
+            flex-wrap: wrap; /* Allow wrapping */
+            gap: 20px; /* Space between items */
+            overflow-x: auto; /* Allow horizontal scrolling for overflow */
+            justify-content: space-evenly; /* Evenly distribute items */
         }
 
         .item {
+            flex: 1;
             width: 60px;
             height: 60px;
             background: #e0e0e0;
@@ -244,15 +248,35 @@
         }
     
         properties.forEach(property => {
-            const item = document.createElement('div');
-            item.className = 'item';
-            item.innerHTML = `
-                <a href="product.html?id=${property.id}">
-                    <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
-                    <div>${property.title}</div>
-                </a>
+            const propertyCard = `
+                <div class="property-card">
+                    <a href="product.html?id=${property.id}" class="property-link">
+                        <img src="${property.imageUrl}" alt="${property.title}" class="property-image">
+                    </a>
+                    <div class="property-header">
+                        <span class="date-posted">${property.datePosted}</span>
+                        <img src="${property.isFavorite ? 'img/full_heart.png' : 'img/base_heart.png'}" 
+                             alt="Favorite" class="fav-icon" 
+                             onclick="toggleFavorite(this, ${property.id})" />
+                    </div>
+                    <div class="property-details">
+                        <a href="product.html?id=${property.id}" class="property-link">
+                            <h3 class="property-title">${property.title}</h3>
+                            <p class="property-address">${property.address}</p>
+                            <p class="property-info">${property.type} | ${property.price}</p>
+                            <div class="property-distance">
+                                <img src="img/walk-icon.png" alt="Walk Icon" width="16" height="16"> 
+                                ${property.distance}
+                            </div>
+                        </a>
+                        <div class="property-contact">
+                            <a href="mailto:emailproperty@example.com" class="contact-btn">Email Property</a>
+                            <a href="contactus.html" class="contact-btn">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
             `;
-            section.appendChild(item);
+            section.innerHTML += propertyCard;
         });
     }
     </script>

@@ -188,6 +188,7 @@ body {
         }
             
         .property-card {
+            flex: 1;
                 border: 1px solid #ccc;
                 border-radius: 8px;
                 overflow: hidden;
