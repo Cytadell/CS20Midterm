@@ -13,32 +13,31 @@ if ($conn->connect_error) {
     exit();
 }
 
-
 // Function to validate Google API user
 function validateGoogleUser() {
-        // Simulate Google API login verification logic (replace this with actual Google API validation)
-        if (isset($_COOKIE['google_id'])) {
-            return intval($_COOKIE['google_id']); // Return the Google user ID from the cookie
-        }
-        return null;
+    // Simulate Google API login verification logic (replace this with actual Google API validation)
+    if (isset($_COOKIE['google_id'])) {
+        return intval($_COOKIE['google_id']); // Return the Google user ID from the cookie
     }
-    
-    // Check user authentication (either from your app or Google API)
-    $userId = null;
-    
-    if (isset($_COOKIE['id']) && isset($_COOKIE['sess'])) {
-        $Controller = new Controller();
-        if ($Controller->checkUserStatus($_COOKIE['id'], $_COOKIE['sess'])) {
-            $userId = intval($_COOKIE['id']); // Get user ID from your system
-        }
-    } else {
-        // Check Google API login if local authentication failed
-        $userId = validateGoogleUser();
+    return null;
+}
+
+// Check user authentication (either from your app or Google API)
+$userId = null;
+
+if (isset($_COOKIE['id']) && isset($_COOKIE['sess'])) {
+    $Controller = new Controller();
+    if ($Controller->checkUserStatus($_COOKIE['id'], $_COOKIE['sess'])) {
+        $userId = intval($_COOKIE['id']); // Get user ID from your system
     }
-    
-    if (!$userId) {
-        echo json_encode(['error' => 'User not authenticated: ' + $userId]);
-        exit();
+} else {
+    // Check Google API login if local authentication failed
+    $userId = validateGoogleUser();
+}
+
+if (!$userId) {
+    echo json_encode(['error' => 'User not authenticated: ' . $userId]);
+    exit();
 }
 
 // Get the type of data to fetch
@@ -52,7 +51,13 @@ if ($type === 'liked') {
     // Fetch applied properties
     $sql = "SELECT property_id FROM appliedProp WHERE user_id = ?";
 } elseif ($type === 'listed') {
-        $sql = "SELECT property_id FROM listedProp WHERE user_id = ?";
+    $sql = "SELECT property_id FROM listedProp WHERE user_id = ?";
+} elseif ($type === 'name') {
+    $sql = "SELECT name FROM users WHERE id = ?";
+} elseif ($type === 'surname') {
+    $sql = "SELECT surname FROM users WHERE id = ?";
+} elseif ($type === 'email') {
+    $sql = "SELECT email FROM users WHERE id = ?";
 } else {
     echo json_encode(['error' => 'Invalid type parameter']);
     exit();
@@ -68,12 +73,21 @@ $stmt->bind_param('i', $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 
-$data = [];
-while ($row = $result->fetch_assoc()) {
-    $data[] = $row;
+if ($type === 'name' || $type === 'surname' || $type === 'email') {
+    $row = $result->fetch_assoc();
+    if ($row) {
+        echo json_encode([$row[$type]]);
+    } else {
+        echo json_encode(['error' => 'Not found']);
+    }
+} else {
+    // Fetch and return as JSON for other types
+    $data = [];
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row;
+    }
+    echo json_encode($data);
 }
-
-echo json_encode($data);
 
 $stmt->close();
 $conn->close();

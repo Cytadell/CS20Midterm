@@ -189,12 +189,11 @@ body {
             
         .property-card {
             flex: 1;
-                border: 1px solid #ccc;
-                border-radius: 8px;
-                overflow: hidden;
-                background-color: #fff;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
         
         .property-card:hover {
